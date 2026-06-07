@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="src/Invex.SemanticVersion/Invex.SemanticVersion.csproj" />
+  <Project Path="tests/Invex.SemanticVersion.Tests/Invex.SemanticVersion.Tests.csproj" />
+  <Project Path="_atom/_atom.csproj" />
+</Solution>
