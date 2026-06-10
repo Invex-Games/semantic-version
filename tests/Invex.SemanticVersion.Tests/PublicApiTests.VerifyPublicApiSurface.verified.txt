@@ -1,0 +1,85 @@
+﻿[
+  {
+    Name: Invex.SemanticVersion.SemVer,
+    Members: [
+      {
+        Name: BuildNumberFromMetadata
+      },
+      {
+        Name: BuildNumberFromPreRelease
+      },
+      {
+        Name: CompareTo
+      },
+      {
+        Name: Equals
+      },
+      {
+        Name: Equals
+      },
+      {
+        Name: ExtractBuildNumber
+      },
+      {
+        Name: FromSystemVersion
+      },
+      {
+        Name: GetHashCode
+      },
+      {
+        Name: IsBetween
+      },
+      {
+        Name: IsPreRelease
+      },
+      {
+        Name: Major
+      },
+      {
+        Name: Metadata
+      },
+      {
+        Name: Minor
+      },
+      {
+        Name: One
+      },
+      {
+        Name: Parse
+      },
+      {
+        Name: Parse
+      },
+      {
+        Name: Parse
+      },
+      {
+        Name: Patch
+      },
+      {
+        Name: Prefix
+      },
+      {
+        Name: PreRelease
+      },
+      {
+        Name: ToString
+      },
+      {
+        Name: ToSystemVersion
+      },
+      {
+        Name: TryParse
+      },
+      {
+        Name: TryParse
+      },
+      {
+        Name: TryParse
+      },
+      {
+        Name: TryParse
+      }
+    ]
+  }
+]

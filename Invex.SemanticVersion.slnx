@@ -1,5 +1,9 @@
 ﻿<Solution>
-  <Project Path="src/Invex.SemanticVersion/Invex.SemanticVersion.csproj" />
-  <Project Path="tests/Invex.SemanticVersion.Tests/Invex.SemanticVersion.Tests.csproj" />
+  <Folder Name="/src/">
+    <Project Path="src/Invex.SemanticVersion/Invex.SemanticVersion.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Invex.SemanticVersion.Tests/Invex.SemanticVersion.Tests.csproj" />
+  </Folder>
   <Project Path="_atom/_atom.csproj" />
 </Solution>
