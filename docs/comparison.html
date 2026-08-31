@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Comparison &amp; Precedence </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Comparison &amp; Precedence ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/docs/comparison.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="comparison--precedence">Comparison &amp; Precedence</h1>
+
+<p><code>SemVer</code> implements full SemVer 2.0.0 precedence rules via <code>IComparable&lt;SemVer&gt;</code> and <code>IComparisonOperators&lt;SemVer, SemVer, bool&gt;</code>.</p>
+<hr>
+<h2 id="precedence-rules-summary">Precedence rules (summary)</h2>
+<p>The ordering follows the <a href="https://semver.org/#spec-item-11">SemVer 2.0.0 specification §11</a>:</p>
+<ol>
+<li><strong>Major</strong> is compared numerically — higher major wins.</li>
+<li><strong>Minor</strong> is compared numerically when major is equal.</li>
+<li><strong>Patch</strong> is compared numerically when major and minor are equal.</li>
+<li><strong>Release &gt; Pre-release</strong> — when core versions are identical a release version (no pre-release) has higher precedence than any pre-release.</li>
+<li><strong>Pre-release identifiers</strong> are compared dot-by-dot left-to-right:
+<ul>
+<li>If both identifiers are purely numeric they are compared <strong>numerically</strong>.</li>
+<li>Otherwise they are compared <strong>lexically</strong> (ordinal).</li>
+<li>A shorter identifier list is <em>less than</em> a longer one when all common identifiers are equal.</li>
+</ul>
+</li>
+<li><strong>Build metadata</strong> is <strong>not</strong> considered for precedence by the spec, but this implementation uses it as a <strong>final tiebreaker</strong> (ordinal comparison) when everything else is equal.</li>
+</ol>
+<hr>
+<h2 id="compareto"><code>CompareTo</code></h2>
+<pre><code class="lang-csharp">int result = SemVer.Parse(&quot;2.0.0&quot;).CompareTo(SemVer.Parse(&quot;1.0.0&quot;)); // &gt; 0
+int result = SemVer.Parse(&quot;1.0.0&quot;).CompareTo(SemVer.Parse(&quot;1.0.0&quot;)); // 0
+int result = SemVer.Parse(&quot;1.0.0&quot;).CompareTo(SemVer.Parse(&quot;2.0.0&quot;)); // &lt; 0
+
+// null is always less than any instance
+int result = SemVer.Parse(&quot;1.0.0&quot;).CompareTo(null); // &gt; 0
+</code></pre>
+<p>This is compatible with <code>List&lt;T&gt;.Sort()</code>, <code>Array.Sort()</code>, <code>SortedSet&lt;T&gt;</code>, <code>OrderBy</code>, etc.</p>
+<hr>
+<h2 id="comparison-operators">Comparison operators</h2>
+<p>All six standard comparison operators are supported:</p>
+<pre><code class="lang-csharp">SemVer a = &quot;2.0.0&quot;;
+SemVer b = &quot;1.0.0&quot;;
+
+bool gt  = a &gt; b;   // true
+bool gte = a &gt;= b;  // true
+bool lt  = a &lt; b;   // false
+bool lte = a &lt;= b;  // false
+bool eq  = a == b;  // false
+bool neq = a != b;  // true
+</code></pre>
+<p>Null comparisons with <code>==</code> and <code>!=</code> are safe:</p>
+<pre><code class="lang-csharp">SemVer? x = null;
+SemVer? y = null;
+bool bothNull = (x == y); // true
+
+SemVer? z = SemVer.Parse(&quot;1.0.0&quot;);
+bool leftNull = (x == z);  // false
+bool rightNull = (z == x); // false
+</code></pre>
+<hr>
+<h2 id="ordering-examples">Ordering examples</h2>
+<h3 id="release-beats-pre-release">Release beats pre-release</h3>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.0.0&quot;) &gt; SemVer.Parse(&quot;1.0.0-alpha&quot;)   // true
+SemVer.Parse(&quot;1.0.0-alpha&quot;) &lt; SemVer.Parse(&quot;1.0.0&quot;)   // true
+</code></pre>
+<h3 id="numeric-pre-release-comparison">Numeric pre-release comparison</h3>
+<pre><code class="lang-csharp">// 10 &gt; 9 numerically (not &quot;10&quot; &lt; &quot;9&quot; lexically)
+SemVer.Parse(&quot;1.0.0-alpha.10&quot;) &gt; SemVer.Parse(&quot;1.0.0-alpha.9&quot;); // true
+</code></pre>
+<h3 id="lexicographic-pre-release-comparison">Lexicographic pre-release comparison</h3>
+<pre><code class="lang-csharp">// 'b' &gt; 'a' — beta is newer than alpha
+SemVer.Parse(&quot;1.0.0-beta&quot;) &gt; SemVer.Parse(&quot;1.0.0-alpha&quot;); // true
+</code></pre>
+<h3 id="longer-pre-release-wins-on-tie">Longer pre-release wins on tie</h3>
+<pre><code class="lang-csharp">// &quot;alpha.1.2&quot; has more identifiers than &quot;alpha.1&quot;
+SemVer.Parse(&quot;1.0.0-alpha.1.2&quot;) &gt; SemVer.Parse(&quot;1.0.0-alpha.1&quot;); // true
+</code></pre>
+<h3 id="build-metadata-as-tiebreaker">Build metadata as tiebreaker</h3>
+<pre><code class="lang-csharp">// All version components and pre-release are equal — metadata breaks the tie
+SemVer.Parse(&quot;1.0.0+build.2&quot;) &gt; SemVer.Parse(&quot;1.0.0+build.1&quot;); // true
+</code></pre>
+<hr>
+<h2 id="sorting-a-collection">Sorting a collection</h2>
+<pre><code class="lang-csharp">var versions = new List&lt;SemVer&gt;
+{
+    &quot;2.0.0&quot;,
+    &quot;1.0.0&quot;,
+    &quot;1.0.0-rc.1&quot;,
+    &quot;1.0.0-alpha&quot;,
+    &quot;1.0.0-alpha.1&quot;,
+};
+
+versions.Sort();
+// Result (ascending): 1.0.0-alpha, 1.0.0-alpha.1, 1.0.0-rc.1, 1.0.0, 2.0.0
+</code></pre>
+<hr>
+<h2 id="equals-and-gethashcode"><code>Equals</code> and <code>GetHashCode</code></h2>
+<p><code>Equals</code> uses <code>CompareTo</code> under the hood, so equality respects SemVer rules (including metadata as tiebreaker):</p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.0.0&quot;).Equals(SemVer.Parse(&quot;1.0.0&quot;));         // true
+SemVer.Parse(&quot;1.0.0+a&quot;).Equals(SemVer.Parse(&quot;1.0.0+b&quot;));     // false (metadata differs)
+SemVer.Parse(&quot;1.0.0&quot;).Equals(SemVer.Parse(&quot;1.0.0-alpha&quot;));    // false
+</code></pre>
+<p><code>GetHashCode</code> is consistent with <code>Equals</code> — two equal <code>SemVer</code> instances always produce the same hash code.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/docs/comparison.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

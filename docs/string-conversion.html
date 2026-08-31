@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>String Conversion </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="String Conversion ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/docs/string-conversion.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="string-conversion">String Conversion</h1>
+
+<p><code>SemVer</code> provides bidirectional implicit conversions with <code>string</code>, and a deterministic <code>ToString()</code> implementation.</p>
+<hr>
+<h2 id="tostring"><code>ToString()</code></h2>
+<p>Returns the canonical SemVer 2.0.0 string representation of the version.</p>
+<p>The output format is:</p>
+<pre><code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]
+</code></pre>
+<p>Pre-release and metadata segments are included <strong>only</strong> when they are non-null.</p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.2.3&quot;).ToString();               // &quot;1.2.3&quot;
+SemVer.Parse(&quot;1.2.3-alpha&quot;).ToString();         // &quot;1.2.3-alpha&quot;
+SemVer.Parse(&quot;1.2.3+build.1&quot;).ToString();       // &quot;1.2.3+build.1&quot;
+SemVer.Parse(&quot;1.2.3-alpha+build.1&quot;).ToString(); // &quot;1.2.3-alpha+build.1&quot;
+</code></pre>
+<p><code>ToString()</code> is the inverse of <code>Parse</code> — a round-trip through <code>Parse</code> → <code>ToString</code> always returns the original string.</p>
+<hr>
+<h2 id="implicit-conversion-from-string">Implicit conversion from <code>string</code></h2>
+<p>Assigning a <code>string</code> literal (or variable) to a <code>SemVer</code> variable calls <code>Parse</code> implicitly:</p>
+<pre><code class="lang-csharp">SemVer version = &quot;1.2.3-rc.1&quot;;
+</code></pre>
+<p>This is equivalent to:</p>
+<pre><code class="lang-csharp">SemVer version = SemVer.Parse(&quot;1.2.3-rc.1&quot;);
+</code></pre>
+<blockquote>
+<p>⚠️ The implicit conversion uses the <strong>throwing</strong> <code>Parse</code> path. An invalid string will throw <code>ArgumentException</code>. Use <code>TryParse</code> if the input may be untrusted.</p>
+</blockquote>
+<h3 id="practical-uses">Practical uses</h3>
+<pre><code class="lang-csharp">// Method parameters
+void SetMinVersion(SemVer min) { /* ... */ }
+SetMinVersion(&quot;2.0.0&quot;); // works
+
+// Collections
+var allowed = new HashSet&lt;SemVer&gt; { &quot;1.0.0&quot;, &quot;1.1.0&quot;, &quot;2.0.0&quot; };
+
+// Comparison operators with literals
+SemVer current = SemVer.Parse(&quot;1.5.0&quot;);
+bool tooOld = current &lt; &quot;2.0.0&quot;; // true
+</code></pre>
+<hr>
+<h2 id="implicit-conversion-to-string">Implicit conversion to <code>string</code></h2>
+<p>Assigning a <code>SemVer</code> to a <code>string</code> variable calls <code>ToString()</code> implicitly:</p>
+<pre><code class="lang-csharp">SemVer version = SemVer.Parse(&quot;1.2.3-alpha+build.1&quot;);
+string text = version; // &quot;1.2.3-alpha+build.1&quot;
+</code></pre>
+<p>This is equivalent to:</p>
+<pre><code class="lang-csharp">string text = version.ToString();
+</code></pre>
+<h3 id="practical-uses-1">Practical uses</h3>
+<pre><code class="lang-csharp">// Storing in a string field
+string currentVersion = SemVer.Parse(&quot;3.0.0&quot;);
+
+// Passing to string-accepting APIs
+Console.WriteLine(SemVer.Parse(&quot;1.0.0&quot;)); // ToString() called automatically
+File.WriteAllText(&quot;version.txt&quot;, SemVer.Parse(&quot;1.0.0&quot;)); // implicit to string
+</code></pre>
+<hr>
+<h2 id="prefix"><code>Prefix</code></h2>
+<p>The <code>Prefix</code> property returns only the <code>MAJOR.MINOR.PATCH</code> part, omitting any pre-release or metadata:</p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.2.3-alpha+build.1&quot;).Prefix; // &quot;1.2.3&quot;
+SemVer.Parse(&quot;1.2.3&quot;).Prefix;               // &quot;1.2.3&quot;
+</code></pre>
+<p>Useful when you need to compare or display only the numeric version core.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/docs/string-conversion.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

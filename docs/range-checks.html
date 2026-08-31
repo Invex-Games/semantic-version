@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Range Checks </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Range Checks ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/docs/range-checks.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="range-checks">Range Checks</h1>
+
+<p><code>SemVer</code> provides the <code>IsBetween</code> method for checking whether a version falls within an exclusive range.</p>
+<hr>
+<h2 id="isbetweensemver-firstbound-semver-secondbound"><code>IsBetween(SemVer firstBound, SemVer secondBound)</code></h2>
+<p>Returns <code>true</code> if the current version is <strong>strictly between</strong> the two bounds (both bounds are exclusive).</p>
+<pre><code class="lang-csharp">bool IsBetween(SemVer firstBound, SemVer secondBound)
+</code></pre>
+<h3 id="basic-usage">Basic usage</h3>
+<pre><code class="lang-csharp">var v = SemVer.Parse(&quot;1.5.0&quot;);
+
+v.IsBetween(&quot;1.0.0&quot;, &quot;2.0.0&quot;);  // true  — 1.0.0 &lt; 1.5.0 &lt; 2.0.0
+v.IsBetween(&quot;1.0.0&quot;, &quot;1.4.0&quot;);  // false — 1.5.0 is not below 1.4.0
+v.IsBetween(&quot;1.5.0&quot;, &quot;2.0.0&quot;);  // false — lower bound is exclusive
+v.IsBetween(&quot;1.0.0&quot;, &quot;1.5.0&quot;);  // false — upper bound is exclusive
+</code></pre>
+<h3 id="order-independent-bounds">Order-independent bounds</h3>
+<p>The method accepts bounds in <strong>any order</strong> — the smaller value is automatically treated as the lower bound:</p>
+<pre><code class="lang-csharp">var v = SemVer.Parse(&quot;1.5.0&quot;);
+
+v.IsBetween(&quot;2.0.0&quot;, &quot;1.0.0&quot;);  // true  — same as IsBetween(&quot;1.0.0&quot;, &quot;2.0.0&quot;)
+v.IsBetween(&quot;1.4.0&quot;, &quot;1.0.0&quot;);  // false — 1.5.0 &gt; 1.4.0 (upper bound)
+</code></pre>
+<h3 id="equal-bounds">Equal bounds</h3>
+<p>When both bounds are the same version, <code>IsBetween</code> returns <code>true</code> only if the version exactly equals the bounds:</p>
+<pre><code class="lang-csharp">var v = SemVer.Parse(&quot;1.0.0&quot;);
+
+v.IsBetween(&quot;1.0.0&quot;, &quot;1.0.0&quot;);  // true  — version == both bounds
+SemVer.Parse(&quot;2.0.0&quot;).IsBetween(&quot;1.0.0&quot;, &quot;1.0.0&quot;); // false
+</code></pre>
+<hr>
+<h2 id="edge-cases">Edge cases</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Version equals lower bound</td>
+<td><code>false</code> (exclusive)</td>
+</tr>
+<tr>
+<td>Version equals upper bound</td>
+<td><code>false</code> (exclusive)</td>
+</tr>
+<tr>
+<td>Version between bounds (ascending)</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>Version between bounds (descending)</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>Version below both bounds</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>Version above both bounds</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>Both bounds equal, version matches</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td>Both bounds equal, version differs</td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="implicit-string-conversion-in-range-checks">Implicit string conversion in range checks</h2>
+<p>Because <code>SemVer</code> supports implicit conversion from <code>string</code>, you can write range checks concisely:</p>
+<pre><code class="lang-csharp">SemVer current = SemVer.Parse(&quot;1.5.0&quot;);
+
+if (current.IsBetween(&quot;1.0.0&quot;, &quot;2.0.0&quot;))
+{
+    Console.WriteLine(&quot;Version is in the 1.x range.&quot;);
+}
+</code></pre>
+<hr>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Both bounds use the same SemVer precedence rules described in <a href="comparison.html">Comparison &amp; Precedence</a>.</li>
+<li>Pre-release and metadata in the bounds are fully respected:</li>
+</ul>
+<pre><code class="lang-csharp">var v = SemVer.Parse(&quot;1.0.0-beta&quot;);
+
+// 1.0.0-alpha &lt; 1.0.0-beta &lt; 1.0.0-rc.1
+v.IsBetween(&quot;1.0.0-alpha&quot;, &quot;1.0.0-rc.1&quot;); // true
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/docs/range-checks.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

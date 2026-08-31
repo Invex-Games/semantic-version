@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SemVer — API Reference </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SemVer — API Reference ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/api/SemVer.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="semver--api-reference"><code>SemVer</code> — API Reference</h1>
+
+<p><strong>Namespace:</strong> <code>Invex.SemanticVersion</code><br>
+<strong>Assembly:</strong> <code>Invex.SemanticVersion</code><br>
+<strong>Targets:</strong> .NET 8.0 · .NET 9.0 · .NET 10.0</p>
+<pre><code class="lang-csharp">public sealed partial class SemVer
+    : ISpanParsable&lt;SemVer&gt;,
+      IComparable&lt;SemVer&gt;,
+      IComparisonOperators&lt;SemVer, SemVer, bool&gt;
+</code></pre>
+<p>Represents an immutable semantic version following the <a href="https://semver.org/">Semantic Versioning 2.0.0</a> specification.<br>
+Supports parsing, comparison, serialization, and conversion for version strings of the form <code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]</code>.</p>
+<hr>
+<h2 id="constructors">Constructors</h2>
+<p><code>SemVer</code> instances are created through static factory methods (<code>Parse</code>, <code>TryParse</code>, <code>FromSystemVersion</code>) or via implicit conversion from <code>string</code>.<br>
+There is no public constructor.</p>
+<hr>
+<h2 id="properties">Properties</h2>
+<h3 id="major"><code>Major</code></h3>
+<pre><code class="lang-csharp">public int Major { get; }
+</code></pre>
+<p>The major version number. Incremented for incompatible API changes.</p>
+<hr>
+<h3 id="minor"><code>Minor</code></h3>
+<pre><code class="lang-csharp">public int Minor { get; }
+</code></pre>
+<p>The minor version number. Incremented for backwards-compatible new functionality.</p>
+<hr>
+<h3 id="patch"><code>Patch</code></h3>
+<pre><code class="lang-csharp">public int Patch { get; }
+</code></pre>
+<p>The patch version number. Incremented for backwards-compatible bug fixes.</p>
+<hr>
+<h3 id="prefix"><code>Prefix</code></h3>
+<pre><code class="lang-csharp">[JsonIgnore]
+public string Prefix { get; }
+</code></pre>
+<p>The core version string in the format <code>&quot;MAJOR.MINOR.PATCH&quot;</code>, without pre-release or metadata.</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.2.3-alpha+build&quot;).Prefix; // &quot;1.2.3&quot;
+</code></pre>
+<hr>
+<h3 id="prerelease"><code>PreRelease</code></h3>
+<pre><code class="lang-csharp">public string? PreRelease { get; }
+</code></pre>
+<p>The pre-release identifier, or <code>null</code> if this is a release version.<br>
+Pre-release identifiers are dot-separated and may contain alphanumeric characters and hyphens (e.g. <code>&quot;alpha.1&quot;</code>, <code>&quot;rc.2&quot;</code>, <code>&quot;beta&quot;</code>).</p>
+<hr>
+<h3 id="isprerelease"><code>IsPreRelease</code></h3>
+<pre><code class="lang-csharp">[JsonIgnore]
+public bool IsPreRelease { get; }
+</code></pre>
+<p><code>true</code> when <code>PreRelease</code> is non-null; <code>false</code> for release versions.</p>
+<hr>
+<h3 id="metadata"><code>Metadata</code></h3>
+<pre><code class="lang-csharp">public string? Metadata { get; }
+</code></pre>
+<p>The build metadata string, or <code>null</code> if no metadata is present.<br>
+Metadata is considered a tiebreaker in this implementation's comparison (the spec ignores it for precedence, but this library uses it as a final tie-breaker).</p>
+<hr>
+<h3 id="buildnumberfromprerelease"><code>BuildNumberFromPreRelease</code></h3>
+<pre><code class="lang-csharp">[JsonIgnore]
+public int BuildNumberFromPreRelease { get; }
+</code></pre>
+<p>The single numeric value extracted from <code>PreRelease</code>, or <code>0</code> if no single number is found.<br>
+Returns <code>0</code> if the pre-release is <code>null</code>, contains no number, or contains more than one number.</p>
+<p><strong>Examples:</strong></p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.0.0-rc.42&quot;).BuildNumberFromPreRelease;   // 42
+SemVer.Parse(&quot;1.0.0-alpha&quot;).BuildNumberFromPreRelease;   // 0 — no number
+SemVer.Parse(&quot;1.0.0-1.2&quot;).BuildNumberFromPreRelease;     // 0 — multiple numbers
+SemVer.Parse(&quot;1.0.0&quot;).BuildNumberFromPreRelease;         // 0 — no pre-release
+</code></pre>
+<hr>
+<h3 id="buildnumberfrommetadata"><code>BuildNumberFromMetadata</code></h3>
+<pre><code class="lang-csharp">[JsonIgnore]
+public int BuildNumberFromMetadata { get; }
+</code></pre>
+<p>The single numeric value extracted from <code>Metadata</code>, or <code>0</code> if no single number is found.<br>
+Same rules as <code>BuildNumberFromPreRelease</code>.</p>
+<p><strong>Examples:</strong></p>
+<pre><code class="lang-csharp">SemVer.Parse(&quot;1.0.0+build.99&quot;).BuildNumberFromMetadata;  // 99
+SemVer.Parse(&quot;1.0.0+build&quot;).BuildNumberFromMetadata;     // 0 — no number
+SemVer.Parse(&quot;1.0.0&quot;).BuildNumberFromMetadata;           // 0 — no metadata
+</code></pre>
+<hr>
+<h3 id="one-static"><code>One</code> <em>(static)</em></h3>
+<pre><code class="lang-csharp">public static SemVer One { get; }
+</code></pre>
+<p>A pre-built instance representing version <code>1.0.0</code>.</p>
+<pre><code class="lang-csharp">SemVer.One.Major;       // 1
+SemVer.One.Minor;       // 0
+SemVer.One.Patch;       // 0
+SemVer.One.PreRelease;  // null
+SemVer.One.Metadata;    // null
+</code></pre>
+<hr>
+<h2 id="static-factory-methods">Static factory methods</h2>
+<h3 id="parsestring"><code>Parse(string)</code></h3>
+<pre><code class="lang-csharp">public static SemVer Parse(string s)
+</code></pre>
+<p>Parses a version string. Throws <code>ArgumentException</code> if <code>s</code> is not a valid SemVer 2.0.0 string.</p>
+<hr>
+<h3 id="parsestring-iformatprovider"><code>Parse(string, IFormatProvider?)</code></h3>
+<pre><code class="lang-csharp">public static SemVer Parse(string s, IFormatProvider? provider)
+</code></pre>
+<p><code>ISpanParsable&lt;SemVer&gt;</code> interface implementation. The <code>provider</code> parameter is ignored — parsing is always culture-invariant.</p>
+<hr>
+<h3 id="parsereadonlyspanchar-iformatprovider"><code>Parse(ReadOnlySpan&lt;char&gt;, IFormatProvider?)</code></h3>
+<pre><code class="lang-csharp">public static SemVer Parse(ReadOnlySpan&lt;char&gt; s, IFormatProvider? provider)
+</code></pre>
+<p>Span-based parse. Avoids a string allocation when the input is already a span. Throws <code>ArgumentException</code> for invalid input.</p>
+<hr>
+<h3 id="tryparsestring-out-semver"><code>TryParse(string?, out SemVer?)</code></h3>
+<pre><code class="lang-csharp">public static bool TryParse(
+    [NotNullWhen(true)] string? s,
+    [MaybeNullWhen(false)] out SemVer result)
+</code></pre>
+<p>Non-throwing parse from string. Returns <code>false</code> and sets <code>result</code> to <code>null</code> when <code>s</code> is <code>null</code> or invalid.</p>
+<hr>
+<h3 id="tryparsestring-iformatprovider-out-semver"><code>TryParse(string?, IFormatProvider?, out SemVer?)</code></h3>
+<pre><code class="lang-csharp">public static bool TryParse(
+    [NotNullWhen(true)] string? s,
+    IFormatProvider? provider,
+    [MaybeNullWhen(false)] out SemVer result)
+</code></pre>
+<p><code>ISpanParsable&lt;SemVer&gt;</code> interface implementation. The <code>provider</code> parameter is ignored.</p>
+<hr>
+<h3 id="tryparsereadonlyspanchar-out-semver"><code>TryParse(ReadOnlySpan&lt;char&gt;, out SemVer?)</code></h3>
+<pre><code class="lang-csharp">public static bool TryParse(
+    ReadOnlySpan&lt;char&gt; s,
+    [MaybeNullWhen(false)] out SemVer result)
+</code></pre>
+<p>Non-throwing span parse (convenience overload without <code>IFormatProvider</code>).</p>
+<hr>
+<h3 id="tryparsereadonlyspanchar-iformatprovider-out-semver"><code>TryParse(ReadOnlySpan&lt;char&gt;, IFormatProvider?, out SemVer?)</code></h3>
+<pre><code class="lang-csharp">public static bool TryParse(
+    ReadOnlySpan&lt;char&gt; s,
+    IFormatProvider? provider,
+    [MaybeNullWhen(false)] out SemVer result)
+</code></pre>
+<p><code>ISpanParsable&lt;SemVer&gt;</code> interface implementation for spans.</p>
+<hr>
+<h3 id="fromsystemversionversion-bool"><code>FromSystemVersion(Version, bool)</code></h3>
+<pre><code class="lang-csharp">public static SemVer FromSystemVersion(Version version, bool throwIfContainsRevision = false)
+</code></pre>
+<p>Creates a <code>SemVer</code> from a <code>System.Version</code>, mapping <code>Major.Minor.Build</code> to <code>Major.Minor.Patch</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>—</td>
+<td>The <code>System.Version</code> to convert (required).</td>
+</tr>
+<tr>
+<td><code>throwIfContainsRevision</code></td>
+<td><code>false</code></td>
+<td>When <code>true</code>, throws <code>ArgumentException</code> if <code>version.Revision &gt; 0</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="extractbuildnumberstring"><code>ExtractBuildNumber(string?)</code></h3>
+<pre><code class="lang-csharp">public static int ExtractBuildNumber(string? input)
+</code></pre>
+<p>Extracts a single numeric sequence from <code>input</code>.</p>
+<ul>
+<li>Returns the number when exactly one numeric sequence is present.</li>
+<li>Returns <code>0</code> for <code>null</code>, empty, whitespace, zero matches, or more than one match.</li>
+</ul>
+<hr>
+<h2 id="instance-methods">Instance methods</h2>
+<h3 id="comparetosemver"><code>CompareTo(SemVer?)</code></h3>
+<pre><code class="lang-csharp">public int CompareTo(SemVer? other)
+</code></pre>
+<p>Compares using SemVer 2.0.0 precedence rules.</p>
+<table>
+<thead>
+<tr>
+<th>Return value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt; 0</code></td>
+<td>This instance precedes <code>other</code></td>
+</tr>
+<tr>
+<td><code>0</code></td>
+<td>Equal precedence</td>
+</tr>
+<tr>
+<td><code>&gt; 0</code></td>
+<td>This instance follows <code>other</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>null</code> is always less than any non-null instance.</p>
+<hr>
+<h3 id="isbetweensemver-semver"><code>IsBetween(SemVer, SemVer)</code></h3>
+<pre><code class="lang-csharp">public bool IsBetween(SemVer firstBound, SemVer secondBound)
+</code></pre>
+<p>Returns <code>true</code> if this version is strictly between <code>firstBound</code> and <code>secondBound</code> (both exclusive).<br>
+Bounds may be supplied in any order. When both bounds are equal, returns <code>true</code> only if this version equals the bounds.</p>
+<hr>
+<h3 id="tosystemversionbool-bool"><code>ToSystemVersion(bool, bool)</code></h3>
+<pre><code class="lang-csharp">public Version ToSystemVersion(
+    bool throwIfContainsPreRelease = false,
+    bool throwIfContainsMetadata = false)
+</code></pre>
+<p>Converts this <code>SemVer</code> to a <code>System.Version</code>, mapping <code>Major.Minor.Patch</code> to <code>Major.Minor.Build</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>throwIfContainsPreRelease</code></td>
+<td><code>false</code></td>
+<td>Throw <code>ArgumentException</code> if <code>PreRelease</code> is non-null.</td>
+</tr>
+<tr>
+<td><code>throwIfContainsMetadata</code></td>
+<td><code>false</code></td>
+<td>Throw <code>ArgumentException</code> if <code>Metadata</code> is non-null.</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="equalssemver"><code>Equals(SemVer?)</code></h3>
+<pre><code class="lang-csharp">public bool Equals(SemVer? other)
+</code></pre>
+<p>Returns <code>true</code> when <code>CompareTo(other) == 0</code>.</p>
+<hr>
+<h3 id="equalsobject"><code>Equals(object?)</code></h3>
+<pre><code class="lang-csharp">public override bool Equals(object? obj)
+</code></pre>
+<p>Returns <code>true</code> when <code>obj</code> is a <code>SemVer</code> and <code>Equals((SemVer)obj)</code> is <code>true</code>.</p>
+<hr>
+<h3 id="gethashcode"><code>GetHashCode()</code></h3>
+<pre><code class="lang-csharp">public override int GetHashCode()
+</code></pre>
+<p>Hash code based on <code>Major</code>, <code>Minor</code>, <code>Patch</code>, <code>PreRelease</code>, and <code>Metadata</code>. Consistent with <code>Equals</code>.</p>
+<hr>
+<h3 id="tostring"><code>ToString()</code></h3>
+<pre><code class="lang-csharp">public override string ToString()
+</code></pre>
+<p>Returns the canonical version string:</p>
+<ul>
+<li><code>&quot;MAJOR.MINOR.PATCH&quot;</code> — no pre-release or metadata</li>
+<li><code>&quot;MAJOR.MINOR.PATCH-PRERELEASE&quot;</code> — pre-release only</li>
+<li><code>&quot;MAJOR.MINOR.PATCH+METADATA&quot;</code> — metadata only</li>
+<li><code>&quot;MAJOR.MINOR.PATCH-PRERELEASE+METADATA&quot;</code> — both</li>
+</ul>
+<hr>
+<h2 id="operators">Operators</h2>
+<h3 id="comparison-operators">Comparison operators</h3>
+<pre><code class="lang-csharp">public static bool operator &gt;(SemVer left, SemVer right)
+public static bool operator &gt;=(SemVer left, SemVer right)
+public static bool operator &lt;(SemVer left, SemVer right)
+public static bool operator &lt;=(SemVer left, SemVer right)
+public static bool operator ==(SemVer? left, SemVer? right)
+public static bool operator !=(SemVer? left, SemVer? right)
+</code></pre>
+<p>All comparison operators delegate to <code>CompareTo</code>. <code>==</code> and <code>!=</code> are null-safe.</p>
+<h3 id="implicit-conversions">Implicit conversions</h3>
+<pre><code class="lang-csharp">// string → SemVer (calls Parse)
+public static implicit operator SemVer(string s)
+
+// SemVer → string (calls ToString)
+public static implicit operator string(SemVer semVer)
+</code></pre>
+<hr>
+<h2 id="json-serialization">JSON serialization</h2>
+<p><code>SemVer</code> is fully compatible with <code>System.Text.Json</code> without any custom configuration.</p>
+<p><strong>Serialized fields:</strong></p>
+<table>
+<thead>
+<tr>
+<th>JSON key</th>
+<th>C# property</th>
+<th>Included when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>major</code></td>
+<td><code>Major</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>minor</code></td>
+<td><code>Minor</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>patch</code></td>
+<td><code>Patch</code></td>
+<td>Always</td>
+</tr>
+<tr>
+<td><code>preRelease</code></td>
+<td><code>PreRelease</code></td>
+<td>Always (may be <code>null</code>)</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td><code>Metadata</code></td>
+<td>Always (may be <code>null</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Excluded fields</strong> (<code>[JsonIgnore]</code>): <code>Prefix</code>, <code>IsPreRelease</code>, <code>BuildNumberFromPreRelease</code>, <code>BuildNumberFromMetadata</code>.</p>
+<hr>
+<h2 id="interface-implementations">Interface implementations</h2>
+<table>
+<thead>
+<tr>
+<th>Interface</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ISpanParsable&lt;SemVer&gt;</code></td>
+<td>Provides <code>Parse</code> and <code>TryParse</code> for both <code>string</code> and <code>ReadOnlySpan&lt;char&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>IComparable&lt;SemVer&gt;</code></td>
+<td>Provides <code>CompareTo</code> for use with sorting and ordered collections.</td>
+</tr>
+<tr>
+<td><code>IComparisonOperators&lt;SemVer, SemVer, bool&gt;</code></td>
+<td>Provides <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code> operators.</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/api/SemVer.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

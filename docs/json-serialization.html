@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>JSON Serialization </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="JSON Serialization ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/docs/json-serialization.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="json-serialization">JSON Serialization</h1>
+
+<p><code>SemVer</code> supports <code>System.Text.Json</code> out of the box. No custom converters or configuration are needed.</p>
+<hr>
+<h2 id="serialization">Serialization</h2>
+<pre><code class="lang-csharp">using System.Text.Json;
+using Invex.SemanticVersion;
+
+var version = SemVer.Parse(&quot;1.2.3-alpha+build.1&quot;);
+
+string json = JsonSerializer.Serialize(version);
+</code></pre>
+<p>Produces the following JSON object:</p>
+<pre><code class="lang-json">{
+  &quot;major&quot;: 1,
+  &quot;minor&quot;: 2,
+  &quot;patch&quot;: 3,
+  &quot;preRelease&quot;: &quot;alpha&quot;,
+  &quot;metadata&quot;: &quot;build.1&quot;
+}
+</code></pre>
+<p>The JSON representation stores each component as a named field.<br>
+<code>[JsonIgnore]</code>-decorated computed properties (<code>Prefix</code>, <code>IsPreRelease</code>, <code>BuildNumberFromPreRelease</code>, <code>BuildNumberFromMetadata</code>) are excluded.</p>
+<hr>
+<h2 id="deserialization">Deserialization</h2>
+<pre><code class="lang-csharp">string json = &quot;&quot;&quot;{&quot;major&quot;:1,&quot;minor&quot;:2,&quot;patch&quot;:3,&quot;preRelease&quot;:&quot;alpha&quot;,&quot;metadata&quot;:&quot;build.1&quot;}&quot;&quot;&quot;;
+
+SemVer restored = JsonSerializer.Deserialize&lt;SemVer&gt;(json)!;
+
+Console.WriteLine(restored);           // 1.2.3-alpha+build.1
+Console.WriteLine(restored.IsPreRelease); // True
+</code></pre>
+<hr>
+<h2 id="round-trip-guarantee">Round-trip guarantee</h2>
+<p>A <code>SemVer</code> serialized and then deserialized always produces the same version string:</p>
+<pre><code class="lang-csharp">var versions = new[]
+{
+    &quot;1.0.0&quot;,
+    &quot;1.0.0-alpha&quot;,
+    &quot;1.0.0+build&quot;,
+    &quot;1.0.0-alpha+build&quot;,
+};
+
+foreach (var v in versions)
+{
+    var original = SemVer.Parse(v);
+    var json     = JsonSerializer.Serialize(original);
+    var restored = JsonSerializer.Deserialize&lt;SemVer&gt;(json)!;
+
+    Console.WriteLine(original == restored); // True for all
+    Console.WriteLine(restored.ToString() == v); // True for all
+}
+</code></pre>
+<hr>
+<h2 id="serializing-null">Serializing <code>null</code></h2>
+<p>Nullable <code>SemVer?</code> properties serialize and deserialize as <code>null</code> in the standard JSON way:</p>
+<pre><code class="lang-csharp">class MyConfig
+{
+    public SemVer? MinVersion { get; set; }
+}
+
+var config = new MyConfig { MinVersion = null };
+string json = JsonSerializer.Serialize(config);
+// {&quot;MinVersion&quot;:null}
+
+var restored = JsonSerializer.Deserialize&lt;MyConfig&gt;(json)!;
+Console.WriteLine(restored.MinVersion is null); // True
+</code></pre>
+<hr>
+<h2 id="embedding-semver-in-larger-objects">Embedding <code>SemVer</code> in larger objects</h2>
+<pre><code class="lang-csharp">class AppSettings
+{
+    public SemVer Version { get; set; } = SemVer.One;
+    public SemVer? RequiredMinVersion { get; set; }
+}
+
+var settings = new AppSettings
+{
+    Version = &quot;2.5.0&quot;,
+    RequiredMinVersion = &quot;2.0.0&quot;,
+};
+
+string json = JsonSerializer.Serialize(settings);
+// {
+//   &quot;Version&quot;: {&quot;major&quot;:2,&quot;minor&quot;:5,&quot;patch&quot;:0,&quot;preRelease&quot;:null,&quot;metadata&quot;:null},
+//   &quot;RequiredMinVersion&quot;: {&quot;major&quot;:2,&quot;minor&quot;:0,&quot;patch&quot;:0,&quot;preRelease&quot;:null,&quot;metadata&quot;:null}
+// }
+
+AppSettings loaded = JsonSerializer.Deserialize&lt;AppSettings&gt;(json)!;
+Console.WriteLine(loaded.Version &gt; loaded.RequiredMinVersion); // True
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/docs/json-serialization.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

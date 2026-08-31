@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Parsing </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Parsing ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/docs/parsing.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="parsing">Parsing</h1>
+
+<p><code>SemVer</code> accepts version strings in the canonical SemVer 2.0.0 format:</p>
+<pre><code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>MAJOR</code>, <code>MINOR</code>, and <code>PATCH</code> are <strong>non-negative integers</strong> with no leading zeros (except <code>0</code> itself).</li>
+<li><code>PRERELEASE</code> is an optional dot-separated sequence of alphanumeric identifiers and hyphens.</li>
+<li><code>METADATA</code> is an optional dot-separated sequence of alphanumeric identifiers and hyphens following <code>+</code>.</li>
+</ul>
+<hr>
+<h2 id="parse--throwing-overload"><code>Parse</code> — throwing overload</h2>
+<p>Use <code>Parse</code> when you expect the input to always be valid:</p>
+<pre><code class="lang-csharp">SemVer v = SemVer.Parse(&quot;1.2.3&quot;);
+SemVer v = SemVer.Parse(&quot;1.2.3-alpha&quot;);
+SemVer v = SemVer.Parse(&quot;1.2.3+build.456&quot;);
+SemVer v = SemVer.Parse(&quot;1.2.3-alpha.1+build.456&quot;);
+</code></pre>
+<p>Throws <code>ArgumentException</code> for any string that does not match the SemVer 2.0.0 grammar.</p>
+<hr>
+<h2 id="tryparse--non-throwing-overload"><code>TryParse</code> — non-throwing overload</h2>
+<p>Use <code>TryParse</code> when the input may be invalid (user input, config files, etc.):</p>
+<pre><code class="lang-csharp">if (SemVer.TryParse(&quot;1.0.0-rc.1&quot;, out var version))
+{
+    // version is valid — use it
+    Console.WriteLine(version.PreRelease); // rc.1
+}
+else
+{
+    // string was not a valid SemVer
+}
+</code></pre>
+<p>Returns <code>false</code> and sets <code>result</code> to <code>null</code> when parsing fails. Never throws.</p>
+<hr>
+<h2 id="ispanparsablesemver--span-overloads"><code>ISpanParsable&lt;SemVer&gt;</code> — span overloads</h2>
+<p>All parsing methods also accept <code>ReadOnlySpan&lt;char&gt;</code>, avoiding allocations when slicing over larger buffers:</p>
+<pre><code class="lang-csharp">ReadOnlySpan&lt;char&gt; span = &quot;1.0.0-beta&quot;.AsSpan();
+
+// Throwing
+SemVer v = SemVer.Parse(span, null);
+
+// Non-throwing
+if (SemVer.TryParse(span, null, out var version))
+{
+    // ...
+}
+
+// Convenience overload without IFormatProvider
+if (SemVer.TryParse(span, out var version2))
+{
+    // ...
+}
+</code></pre>
+<hr>
+<h2 id="valid-and-invalid-examples">Valid and invalid examples</h2>
+<table>
+<thead>
+<tr>
+<th>Input</th>
+<th>Valid?</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.0.0</code></td>
+<td>✅</td>
+<td>Minimal release version</td>
+</tr>
+<tr>
+<td><code>0.0.0</code></td>
+<td>✅</td>
+<td>Zero version</td>
+</tr>
+<tr>
+<td><code>10.20.30</code></td>
+<td>✅</td>
+<td>Large version numbers</td>
+</tr>
+<tr>
+<td><code>1.0.0-alpha</code></td>
+<td>✅</td>
+<td>Pre-release</td>
+</tr>
+<tr>
+<td><code>1.0.0+build</code></td>
+<td>✅</td>
+<td>Build metadata only</td>
+</tr>
+<tr>
+<td><code>1.0.0-alpha+build</code></td>
+<td>✅</td>
+<td>Pre-release + metadata</td>
+</tr>
+<tr>
+<td><code>1.0.0-alpha.1+exp.sha.5114f85</code></td>
+<td>✅</td>
+<td>Complex pre-release and metadata</td>
+</tr>
+<tr>
+<td><code>1.0</code></td>
+<td>❌</td>
+<td>Missing patch component</td>
+</tr>
+<tr>
+<td><code>1.0.0.0</code></td>
+<td>❌</td>
+<td>Four components (not SemVer)</td>
+</tr>
+<tr>
+<td><code>1..0</code></td>
+<td>❌</td>
+<td>Empty component</td>
+</tr>
+<tr>
+<td><code>1.0.0-</code></td>
+<td>❌</td>
+<td>Empty pre-release</td>
+</tr>
+<tr>
+<td><code>1.0.0+</code></td>
+<td>❌</td>
+<td>Empty metadata</td>
+</tr>
+<tr>
+<td><code>-1.0.0</code></td>
+<td>❌</td>
+<td>Negative major</td>
+</tr>
+<tr>
+<td><code>a.0.0</code></td>
+<td>❌</td>
+<td>Non-numeric major</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="implicit-parse-via-string-assignment">Implicit parse via <code>string</code> assignment</h2>
+<p>Because <code>SemVer</code> defines an implicit conversion from <code>string</code>, you can also write:</p>
+<pre><code class="lang-csharp">SemVer v = &quot;1.0.0-rc.1&quot;;  // calls Parse internally
+</code></pre>
+<p>This uses the throwing <code>Parse</code> path — an invalid string will throw <code>ArgumentException</code>.<br>
+See <a href="string-conversion.html">String Conversion</a> for details.</p>
+<hr>
+<h2 id="what-the-parser-validates">What the parser validates</h2>
+<p>Under the hood, <code>SemVer</code> uses the <a href="https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string">official SemVer 2.0.0 regular expression</a>:</p>
+<pre><code>^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)
+  (?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?
+  (?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
+</code></pre>
+<p>This ensures leading zeros are rejected (e.g. <code>01.0.0</code> is invalid) and all identifiers contain only the allowed character set.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/docs/parsing.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
