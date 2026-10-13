@@ -7,7 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-*No unreleased changes yet.*
+### Removed
+
+- The .NET 8.0 and .NET 9.0 targets. The package now targets .NET 10.0 only.
 
 ---
 

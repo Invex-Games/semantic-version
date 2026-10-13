@@ -8,8 +8,6 @@ This guide walks you from installation to your first working code in five minute
 
 | Target Framework | Minimum SDK |
 |-----------------|-------------|
-| .NET 8.0        | .NET SDK 8  |
-| .NET 9.0        | .NET SDK 9  |
 | .NET 10.0       | .NET SDK 10 |
 
 No additional runtime dependencies are required.
