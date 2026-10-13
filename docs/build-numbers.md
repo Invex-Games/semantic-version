@@ -76,6 +76,9 @@ SemVer.ExtractBuildNumber("   ");            // 0
 | Exactly one numeric sequence found | That number |
 | Zero or more than one numeric sequence | `0` |
 
+> [!NOTE]
+> A single numeric sequence larger than `int.MaxValue` throws `OverflowException`.
+
 ---
 
 ## Practical example
@@ -97,3 +100,8 @@ var version = SemVer.Parse("2.3.0+build.1337");
 int buildNumber = version.BuildNumberFromMetadata; // 1337
 ```
 
+## See also
+
+- [System.Version Interop](system-version-interop.md)
+- [Parsing](parsing.md)
+- <xref:Invex.SemanticVersion.SemVer>
