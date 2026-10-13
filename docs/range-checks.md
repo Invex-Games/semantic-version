@@ -1,6 +1,7 @@
 # Range Checks
 
-`SemVer` provides the `IsBetween` method for checking whether a version falls within an exclusive range.
+`SemVer` provides the `IsBetween` method for checking whether a version falls within an exclusive range. Use it
+for simple "newer than X but older than Y" checks between two concrete versions.
 
 ---
 
@@ -9,7 +10,7 @@
 Returns `true` if the current version is **strictly between** the two bounds (both bounds are exclusive).
 
 ```csharp
-bool IsBetween(SemVer firstBound, SemVer secondBound)
+public bool IsBetween(SemVer firstBound, SemVer secondBound)
 ```
 
 ### Basic usage
@@ -89,3 +90,8 @@ var v = SemVer.Parse("1.0.0-beta");
 v.IsBetween("1.0.0-alpha", "1.0.0-rc.1"); // true
 ```
 
+## See also
+
+- [Comparison & Precedence](comparison.md)
+- [String Conversion](string-conversion.md)
+- <xref:Invex.SemanticVersion.SemVer.IsBetween(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)>
