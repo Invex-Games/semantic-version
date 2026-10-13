@@ -1,6 +1,6 @@
 # Invex.SemanticVersion
 
-A small, dependency-free C# library that provides a single immutable `SemVer` type for **parsing**, **comparing**, **serializing**, and **converting** version strings that conform to the [Semantic Versioning 2.0.0](https://semver.org/) specification.
+A small C# library that provides a single immutable `SemVer` type for **parsing**, **comparing**, **serializing**, and **converting** version strings that conform to the [Semantic Versioning 2.0.0](https://semver.org/) specification.
 
 [![NuGet](https://img.shields.io/nuget/v/Invex.SemanticVersion.svg)](https://www.nuget.org/packages/Invex.SemanticVersion/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE.txt)
@@ -9,13 +9,13 @@ A small, dependency-free C# library that provides a single immutable `SemVer` ty
 
 ## What is it?
 
-`Invex.SemanticVersion` gives you a first-class `SemVer` value type that fits naturally into the .NET BCL:
+`Invex.SemanticVersion` gives you a first-class, immutable `SemVer` class that fits naturally into the .NET BCL:
 
 - Implements **`ISpanParsable<SemVer>`**, **`IComparable<SemVer>`**, and **`IComparisonOperators<SemVer, SemVer, bool>`**.
 - Works out of the box with **`System.Text.Json`** (round-trip serialization).
 - Provides **implicit conversions** to/from `string` so you can drop it into any existing string-based API.
 - Includes interop with **`System.Version`** (the legacy .NET version type).
-- Targets **.NET 10** — no third-party runtime dependencies.
+- Targets **.NET 10**. NuGet restores its two package dependencies, `JetBrains.Annotations` and `System.IO.Abstractions`.
 
 ---
 
