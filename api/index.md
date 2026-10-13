@@ -16,9 +16,9 @@
 | `PreRelease`, `Metadata` | Optional pre-release and build-metadata segments (nullable). |
 | `Prefix` | `"MAJOR.MINOR.PATCH"` without pre-release/metadata. |
 | `IsPreRelease` | `true` when a pre-release identifier is present. |
-| `BuildNumberFromPreRelease` / `BuildNumberFromMetadata` | Single numeric value extracted from the respective segment, otherwise `0`. |
+| `BuildNumberFromPreRelease` / `BuildNumberFromMetadata` | Single numeric value extracted from the respective segment, otherwise `0`; throws `OverflowException` if that value exceeds `int.MaxValue`. |
 | `SemVer.One` | Convenience instance for `1.0.0`. |
-| `Parse` / `TryParse` | String and `ReadOnlySpan<char>` parsing (`ISpanParsable<SemVer>`). |
+| `Parse` / `TryParse` | String and `ReadOnlySpan<char>` parsing (`ISpanParsable<SemVer>`); `Parse` throws `OverflowException` when a core component exceeds `int.MaxValue`, `TryParse` returns `false`. |
 | `CompareTo`, `Equals`, comparison operators | SemVer-compliant precedence and equality. |
 | `IsBetween` | Exclusive, order-independent range check. |
 | `ToSystemVersion` / `FromSystemVersion` | Conversion to and from `System.Version`. |

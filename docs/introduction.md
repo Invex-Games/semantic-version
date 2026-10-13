@@ -1,6 +1,6 @@
 # Introduction
 
-Invex.SemanticVersion gives .NET code a single value type for [Semantic Versioning 2.0.0](https://semver.org/)
+Invex.SemanticVersion gives .NET code a single immutable type for [Semantic Versioning 2.0.0](https://semver.org/)
 versions. This page explains when it fits, the concepts it is built on, and the design choices that affect how
 it behaves.
 
