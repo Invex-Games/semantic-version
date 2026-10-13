@@ -2,7 +2,7 @@
 
 **Namespace:** `Invex.SemanticVersion`  
 **Assembly:** `Invex.SemanticVersion`  
-**Targets:** .NET 8.0 · .NET 9.0 · .NET 10.0
+**Targets:** .NET 10.0
 
 ```csharp
 public sealed partial class SemVer
