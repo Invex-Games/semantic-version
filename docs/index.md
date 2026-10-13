@@ -15,7 +15,7 @@ A small, dependency-free C# library that provides a single immutable `SemVer` ty
 - Works out of the box with **`System.Text.Json`** (round-trip serialization).
 - Provides **implicit conversions** to/from `string` so you can drop it into any existing string-based API.
 - Includes interop with **`System.Version`** (the legacy .NET version type).
-- Targets **.NET 8, 9, and 10** — no third-party runtime dependencies.
+- Targets **.NET 10** — no third-party runtime dependencies.
 
 ---
 

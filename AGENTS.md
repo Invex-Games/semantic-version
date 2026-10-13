@@ -1,4 +1,4 @@
-# Copilot Instructions
+# Agent Instructions
 
 Guidance for AI agents working in **Invex.SemanticVersion** — a small, dependency-free C# library
 that provides a single immutable `SemVer` type for parsing, comparing, serializing, and converting
@@ -9,15 +9,15 @@ Keep changes focused and defer to the linked docs for detail.
 
 | Project | Role | Target frameworks |
 |---------|------|-------------------|
-| `Invex.SemanticVersion` | The only library: `SemVer` class with parsing, comparison, JSON serialization, and `System.Version` interop | `net8.0;net9.0;net10.0` |
-| `Invex.SemanticVersion.Tests` | NUnit test suite covering the full public API | `net8.0;net9.0;net10.0` |
+| `Invex.SemanticVersion` | The only library: `SemVer` class with parsing, comparison, JSON serialization, and `System.Version` interop | `net10.0` |
+| `Invex.SemanticVersion.Tests` | NUnit test suite covering the full public API | `net10.0` |
 
 Sources live under `src/`, tests under `tests/`, the Atom build definition under `_atom/`, and the
 DocFX documentation site under `docs/` and `api/`.
 
 ## Build & language specifics
 
-- **.NET 10 SDK** is required. Both projects multi-target `net8.0;net9.0;net10.0`.
+- **.NET 10 SDK** is required. Both projects target `net10.0`.
 - C# `LangVersion 14`, `ImplicitUsings` and `Nullable` enabled, `TreatWarningsAsErrors` on.
 - Global usings live in each project's `_usings.cs` — add shared usings there, not per-file.
 - `GenerateDocumentationFile` is on, so **all public members need XML doc comments**.
@@ -92,8 +92,8 @@ analyser (`DecSm.Analyzers.PublicApiSurface`) flags anything missing, and warnin
   1. Overwrite the `*.verified.txt` with the contents of the matching `*.received.txt`.
   2. Delete the `*.received.txt`.
   3. Re-run `dotnet test` to confirm the suite is green.
-- The test matrix runs against all three target frameworks (`net8.0`, `net9.0`, `net10.0`). Ensure
-  new code compiles and behaves identically across all three.
+- The tests run on `net10.0` on every CI platform. Ensure new code behaves identically
+  across them.
 
 ## Adding a new member to `SemVer`
 
