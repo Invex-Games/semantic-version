@@ -18,8 +18,8 @@ Supports parsing, comparison, serialization, and conversion for version strings 
 
 ## Constructors
 
-`SemVer` instances are created through static factory methods (`Parse`, `TryParse`, `FromSystemVersion`) or via implicit conversion from `string`.  
-There is no public constructor.
+`SemVer` instances are usually created through static factory methods (`Parse`, `TryParse`, `FromSystemVersion`) or via implicit conversion from `string`.  
+The public parameterless constructor `new SemVer()` creates `0.0.0`.
 
 ---
 
@@ -192,7 +192,7 @@ public static SemVer Parse(string s, IFormatProvider? provider)
 public static SemVer Parse(ReadOnlySpan<char> s, IFormatProvider? provider)
 ```
 
-Span-based parse. Avoids a string allocation when the input is already a span. Throws `ArgumentException` for invalid input.
+Span-based parse that implements `ISpanParsable<SemVer>`. The span is converted to a string and parsed with the string overload, so it does not avoid an allocation. Throws `ArgumentException` for invalid input.
 
 ---
 
@@ -282,12 +282,13 @@ Extracts a single numeric sequence from `input`.
 public int CompareTo(SemVer? other)
 ```
 
-Compares using SemVer 2.0.0 precedence rules.
+Compares using SemVer 2.0.0 precedence rules, then uses `Metadata` as a final ordinal tiebreaker. Unlike the
+specification, `1.0.0+a` and `1.0.0+b` therefore compare as different.
 
 | Return value | Meaning |
 |-------------|---------|
 | `< 0` | This instance precedes `other` |
-| `0`   | Equal precedence |
+| `0`   | Equal precedence and identical metadata |
 | `> 0` | This instance follows `other` |
 
 `null` is always less than any non-null instance.
@@ -398,15 +399,15 @@ public static implicit operator string(SemVer semVer)
 
 `SemVer` is fully compatible with `System.Text.Json` without any custom configuration.
 
-**Serialized fields:**
+**Serialized fields** (a camelCase naming policy, such as the ASP.NET Core default, writes `major`, `preRelease`, and so on):
 
-| JSON key | C# property | Included when |
+| JSON key (default options) | C# property | Included when |
 |----------|-------------|---------------|
-| `major` | `Major` | Always |
-| `minor` | `Minor` | Always |
-| `patch` | `Patch` | Always |
-| `preRelease` | `PreRelease` | Always (may be `null`) |
-| `metadata` | `Metadata` | Always (may be `null`) |
+| `Major` | `Major` | Always |
+| `Minor` | `Minor` | Always |
+| `Patch` | `Patch` | Always |
+| `PreRelease` | `PreRelease` | Always (may be `null`) |
+| `Metadata` | `Metadata` | Always (may be `null`) |
 
 **Excluded fields** (`[JsonIgnore]`): `Prefix`, `IsPreRelease`, `BuildNumberFromPreRelease`, `BuildNumberFromMetadata`.
 
