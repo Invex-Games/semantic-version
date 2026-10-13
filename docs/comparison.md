@@ -14,7 +14,8 @@ The ordering follows the [SemVer 2.0.0 specification §11](https://semver.org/#s
 3. **Patch** is compared numerically when major and minor are equal.
 4. **Release > Pre-release** — when core versions are identical a release version (no pre-release) has higher precedence than any pre-release.
 5. **Pre-release identifiers** are compared dot-by-dot left-to-right:
-   - If both identifiers are purely numeric they are compared **numerically**.
+   - If both identifiers are purely numeric and fit in an `int` they are compared **numerically**.
+     Numeric identifiers larger than `int.MaxValue` fall back to ordinal comparison.
    - Otherwise they are compared **lexically** (ordinal).
    - A shorter identifier list is *less than* a longer one when all common identifiers are equal.
 6. **Build metadata** is **not** considered for precedence by the spec, but this implementation uses it as a **final tiebreaker** (ordinal comparison) when everything else is equal.

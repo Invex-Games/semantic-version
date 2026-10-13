@@ -12,7 +12,7 @@ It provides a single immutable `SemVer` type for **parsing**, **comparing**, **s
 ## Features
 
 - **Spec-compliant parsing.** Parses `MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]` using the official SemVer regex.
-- **Correct precedence comparison.** Release > pre-release, numeric identifiers compared numerically, longer pre-release wins on tie.
+- **Correct precedence comparison.** Release > pre-release, numeric identifiers (up to `int.MaxValue`) compared numerically, longer pre-release wins on tie.
 - **Familiar BCL surface.** Implements `ISpanParsable<SemVer>`, `IComparable<SemVer>`, and `IComparisonOperators<SemVer, SemVer, bool>`.
 - **`System.Text.Json` support.** Round-trips through `JsonSerializer` out of the box, with no custom converter.
 - **Implicit conversions.** Converts to and from `string`, plus interop with `System.Version`.

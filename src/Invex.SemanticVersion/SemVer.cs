@@ -211,8 +211,9 @@ public sealed partial class SemVer()
     ///         <item>Compare major, minor, and patch versions numerically</item>
     ///         <item>Pre-release versions have lower precedence than normal versions</item>
     ///         <item>
-    ///             Pre-release identifiers are compared left to right; when both identifiers are numeric they are
-    ///             compared numerically, otherwise ordinally
+    ///             Pre-release identifiers are compared left to right; when both identifiers parse as an
+    ///             <see cref="int" /> they are compared numerically, otherwise ordinally (so numeric identifiers
+    ///             greater than <see cref="int.MaxValue" /> are compared as strings)
     ///         </item>
     ///         <item>When all shared identifiers are equal, the version with more pre-release identifiers is greater</item>
     ///         <item>Metadata is used only as a final tiebreaker (ordinal comparison)</item>
@@ -556,6 +557,11 @@ public sealed partial class SemVer()
     ///     Thrown when <paramref name="throwIfContainsPreRelease" /> is <see langword="true" /> and pre-release data
     ///     is present, or when <paramref name="throwIfContainsMetadata" /> is <see langword="true" /> and metadata is
     ///     present.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    ///     Thrown when <see cref="Major" />, <see cref="Minor" /> or <see cref="Patch" /> is negative, for example a
+    ///     <see cref="Patch" /> of <c>-1</c> produced by <see cref="FromSystemVersion" /> from a
+    ///     <see cref="System.Version" /> without a build component.
     /// </exception>
     /// <remarks>
     ///     Maps SemVer Major.Minor.Patch to System.Version Major.Minor.Build.
