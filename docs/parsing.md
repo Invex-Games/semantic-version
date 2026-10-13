@@ -1,8 +1,10 @@
 # Parsing
 
-`SemVer` accepts version strings in the canonical SemVer 2.0.0 format:
+Parsing turns a version string into a `SemVer`; use this page to choose between the throwing and non-throwing
+overloads and to see exactly which strings are accepted. `SemVer` accepts version strings in the canonical
+SemVer 2.0.0 format:
 
-```
+```text
 MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]
 ```
 
@@ -24,7 +26,9 @@ SemVer v = SemVer.Parse("1.2.3+build.456");
 SemVer v = SemVer.Parse("1.2.3-alpha.1+build.456");
 ```
 
-Throws `ArgumentException` for any string that does not match the SemVer 2.0.0 grammar.
+Throws `ArgumentException` for any string that does not match the SemVer 2.0.0 grammar,
+`ArgumentNullException` for `null`, and `OverflowException` when `MAJOR`, `MINOR` or `PATCH` is larger than
+`int.MaxValue`.
 
 ---
 
@@ -44,13 +48,16 @@ else
 }
 ```
 
-Returns `false` and sets `result` to `null` when parsing fails. Never throws.
+Returns `false` and sets `result` to `null` when parsing fails (including `null` input and components larger
+than `int.MaxValue`). Never throws. The `IFormatProvider` parameter of the `ISpanParsable<SemVer>` overloads is
+ignored; parsing is culture-independent.
 
 ---
 
 ## `ISpanParsable<SemVer>` — span overloads
 
-All parsing methods also accept `ReadOnlySpan<char>`, avoiding allocations when slicing over larger buffers:
+All parsing methods also accept `ReadOnlySpan<char>`, so `SemVer` works with generic code constrained to
+`ISpanParsable<T>`. The span is copied to a string before parsing:
 
 ```csharp
 ReadOnlySpan<char> span = "1.0.0-beta".AsSpan();
@@ -102,7 +109,7 @@ Because `SemVer` defines an implicit conversion from `string`, you can also writ
 SemVer v = "1.0.0-rc.1";  // calls Parse internally
 ```
 
-This uses the throwing `Parse` path — an invalid string will throw `ArgumentException`.  
+This uses the throwing `Parse` path, so an invalid string will throw `ArgumentException`.
 See [String Conversion](string-conversion.md) for details.
 
 ---
@@ -111,7 +118,7 @@ See [String Conversion](string-conversion.md) for details.
 
 Under the hood, `SemVer` uses the [official SemVer 2.0.0 regular expression](https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string):
 
-```
+```text
 ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)
   (?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?
   (?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
@@ -119,3 +126,8 @@ Under the hood, `SemVer` uses the [official SemVer 2.0.0 regular expression](htt
 
 This ensures leading zeros are rejected (e.g. `01.0.0` is invalid) and all identifiers contain only the allowed character set.
 
+## See also
+
+- [String Conversion](string-conversion.md)
+- [Comparison & Precedence](comparison.md)
+- <xref:Invex.SemanticVersion.SemVer>
