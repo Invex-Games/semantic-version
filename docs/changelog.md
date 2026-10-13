@@ -42,6 +42,11 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
-[Unreleased]: https://github.com/invex/semantic-version/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/invex/semantic-version/releases/tag/v1.0.0
+## See also
+
+- [Introduction](introduction.md)
+- [Semantic Versioning 2.0.0 specification](https://semver.org/)
+
+[Unreleased]: https://github.com/Invex-Games/semantic-version/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/Invex-Games/semantic-version/releases/tag/v1.0.0
 
