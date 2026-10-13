@@ -1,6 +1,7 @@
 # System.Version Interop
 
-`SemVer` provides two methods for converting between `SemVer` and the built-in `System.Version` type.
+`SemVer` provides two methods for converting between `SemVer` and the built-in `System.Version` type. Use them
+when you work with assembly versions or other APIs that only understand `System.Version`.
 
 ---
 
@@ -75,6 +76,10 @@ SemVer v = SemVer.FromSystemVersion(new Version(1, 2, 3, 4));
 // v.Patch == 3
 ```
 
+> [!NOTE]
+> `Build` is copied to `Patch` as-is. A `System.Version` created without a build component, such as
+> `new Version(1, 2)`, has `Build == -1`, so the resulting `SemVer` has `Patch == -1`.
+
 ### Guard flag
 
 Pass `throwIfContainsRevision: true` to opt into strict mode:
@@ -116,3 +121,8 @@ if (current < minimum)
     throw new InvalidOperationException($"Assembly version {current} is below the required minimum {minimum}.");
 ```
 
+## See also
+
+- [Build Number Extraction](build-numbers.md)
+- [Comparison & Precedence](comparison.md)
+- <xref:Invex.SemanticVersion.SemVer>

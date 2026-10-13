@@ -1,6 +1,7 @@
 # Comparison & Precedence
 
 `SemVer` implements full SemVer 2.0.0 precedence rules via `IComparable<SemVer>` and `IComparisonOperators<SemVer, SemVer, bool>`.
+Read this page when you sort versions or check whether one version is newer than another.
 
 ---
 
@@ -51,7 +52,8 @@ bool eq  = a == b;  // false
 bool neq = a != b;  // true
 ```
 
-Null comparisons with `==` and `!=` are safe:
+Null comparisons with `==` and `!=` are safe. The ordering operators (`<`, `<=`, `>`, `>=`) call `CompareTo`
+on the left operand, so it must not be `null`; a `null` right operand sorts before every version.
 
 ```csharp
 SemVer? x = null;
@@ -134,3 +136,8 @@ SemVer.Parse("1.0.0").Equals(SemVer.Parse("1.0.0-alpha"));    // false
 
 `GetHashCode` is consistent with `Equals` — two equal `SemVer` instances always produce the same hash code.
 
+## See also
+
+- [Range Checks](range-checks.md)
+- [Parsing](parsing.md)
+- <xref:Invex.SemanticVersion.SemVer>

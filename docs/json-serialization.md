@@ -1,6 +1,7 @@
 # JSON Serialization
 
-`SemVer` supports `System.Text.Json` out of the box. No custom converters or configuration are needed.
+`SemVer` supports `System.Text.Json` out of the box. No custom converters or configuration are needed. Read
+this page when you store versions in settings files or exchange them over JSON APIs.
 
 ---
 
@@ -15,27 +16,33 @@ var version = SemVer.Parse("1.2.3-alpha+build.1");
 string json = JsonSerializer.Serialize(version);
 ```
 
-Produces the following JSON object:
+Produces the following JSON object (shown indented for readability):
 
 ```json
 {
-  "major": 1,
-  "minor": 2,
-  "patch": 3,
-  "preRelease": "alpha",
-  "metadata": "build.1"
+  "Major": 1,
+  "Minor": 2,
+  "Patch": 3,
+  "PreRelease": "alpha",
+  "Metadata": "build.1"
 }
 ```
 
 The JSON representation stores each component as a named field.  
 `[JsonIgnore]`-decorated computed properties (`Prefix`, `IsPreRelease`, `BuildNumberFromPreRelease`, `BuildNumberFromMetadata`) are excluded.
 
+> [!NOTE]
+> Property names follow your `JsonSerializerOptions`. With the default options they are written as declared
+> (`Major`, `PreRelease`, …) and matched case-sensitively when reading. With `JsonSerializerDefaults.Web`
+> (the ASP.NET Core default) they are written in camelCase (`major`, `preRelease`, …) and matched
+> case-insensitively.
+
 ---
 
 ## Deserialization
 
 ```csharp
-string json = """{"major":1,"minor":2,"patch":3,"preRelease":"alpha","metadata":"build.1"}""";
+string json = """{"Major":1,"Minor":2,"Patch":3,"PreRelease":"alpha","Metadata":"build.1"}""";
 
 SemVer restored = JsonSerializer.Deserialize<SemVer>(json)!;
 
@@ -108,11 +115,16 @@ var settings = new AppSettings
 
 string json = JsonSerializer.Serialize(settings);
 // {
-//   "Version": {"major":2,"minor":5,"patch":0,"preRelease":null,"metadata":null},
-//   "RequiredMinVersion": {"major":2,"minor":0,"patch":0,"preRelease":null,"metadata":null}
+//   "Version": {"Major":2,"Minor":5,"Patch":0,"PreRelease":null,"Metadata":null},
+//   "RequiredMinVersion": {"Major":2,"Minor":0,"Patch":0,"PreRelease":null,"Metadata":null}
 // }
 
 AppSettings loaded = JsonSerializer.Deserialize<AppSettings>(json)!;
 Console.WriteLine(loaded.Version > loaded.RequiredMinVersion); // True
 ```
 
+## See also
+
+- [String Conversion](string-conversion.md)
+- [Getting Started](getting-started.md)
+- <xref:Invex.SemanticVersion.SemVer>

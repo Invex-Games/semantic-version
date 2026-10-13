@@ -1,6 +1,7 @@
 # String Conversion
 
 `SemVer` provides bidirectional implicit conversions with `string`, and a deterministic `ToString()` implementation.
+Read this page when you pass versions to or from string-based APIs.
 
 ---
 
@@ -10,7 +11,7 @@ Returns the canonical SemVer 2.0.0 string representation of the version.
 
 The output format is:
 
-```
+```text
 MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]
 ```
 
@@ -41,7 +42,8 @@ This is equivalent to:
 SemVer version = SemVer.Parse("1.2.3-rc.1");
 ```
 
-> ⚠️ The implicit conversion uses the **throwing** `Parse` path. An invalid string will throw `ArgumentException`. Use `TryParse` if the input may be untrusted.
+> [!WARNING]
+> The implicit conversion uses the **throwing** `Parse` path. An invalid string will throw `ArgumentException`. Use `TryParse` if the input may be untrusted.
 
 ### Practical uses
 
@@ -99,3 +101,8 @@ SemVer.Parse("1.2.3").Prefix;               // "1.2.3"
 
 Useful when you need to compare or display only the numeric version core.
 
+## See also
+
+- [Parsing](parsing.md)
+- [JSON Serialization](json-serialization.md)
+- <xref:Invex.SemanticVersion.SemVer>

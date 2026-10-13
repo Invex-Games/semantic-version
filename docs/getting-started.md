@@ -1,6 +1,7 @@
 # Getting Started
 
-This guide walks you from installation to your first working code in five minutes.
+This guide walks you from installation to your first working code in five minutes. Read it first if you are
+new to the library.
 
 ---
 
@@ -12,7 +13,8 @@ This guide walks you from installation to your first working code in five minute
 | .NET 9.0        | .NET SDK 9  |
 | .NET 10.0       | .NET SDK 10 |
 
-No additional runtime dependencies are required.
+The package references `JetBrains.Annotations` and `System.IO.Abstractions`, which NuGet restores
+automatically.
 
 ---
 
@@ -36,6 +38,7 @@ Install-Package Invex.SemanticVersion
 <PackageReference Include="Invex.SemanticVersion" Version="*" />
 ```
 
+> [!TIP]
 > Replace `*` with the specific version you want to pin, e.g. `1.0.0`.
 
 ---
@@ -47,6 +50,8 @@ Everything lives in a single namespace:
 ```csharp
 using Invex.SemanticVersion;
 ```
+
+In projects with `ImplicitUsings` enabled, the package adds this `using` as a global using for you.
 
 ---
 
@@ -98,7 +103,8 @@ SemVer fromSys = SemVer.FromSystemVersion(new System.Version(1, 2, 3)); // 1.2.3
 
 ## Next steps
 
-- **[Parsing](parsing.md)** — all parsing overloads and validation rules.
-- **[Comparison & Precedence](comparison.md)** — how SemVer ordering works.
-- **[API Reference](../api/SemVer.md)** — every property and method documented.
+- [Parsing](parsing.md): all parsing overloads and validation rules.
+- [Comparison & Precedence](comparison.md): how SemVer ordering works.
+- [JSON Serialization](json-serialization.md): storing versions in settings files.
+- [API Reference](../api/index.md): every property and method documented.
 
