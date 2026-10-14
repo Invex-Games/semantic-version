@@ -25,7 +25,7 @@ Install from [NuGet](https://www.nuget.org/packages/Invex.SemanticVersion):
 dotnet add package Invex.SemanticVersion
 ```
 
-The package targets .NET 8.0, .NET 9.0 and .NET 10.0. It references `JetBrains.Annotations` and
+The package targets .NET 10.0. It references `JetBrains.Annotations` and
 `System.IO.Abstractions`, which NuGet restores automatically.
 
 ## Quick start
