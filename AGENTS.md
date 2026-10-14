@@ -20,7 +20,9 @@ DocFX documentation site under `docs/` and `api/`.
 - **.NET 10 SDK** is required. Both projects target `net10.0`.
 - C# `LangVersion 14`, `ImplicitUsings` and `Nullable` enabled, `TreatWarningsAsErrors` on.
 - Global usings live in each project's `_usings.cs` — add shared usings there, not per-file.
-- `GenerateDocumentationFile` is on, so **all public members need XML doc comments**.
+- `GenerateDocumentationFile` is on and `CS1591` is **enforced** in `src/` — every public type
+  and member needs XML doc comments. (`_atom` and the test project suppress `CS1591` locally; do
+  not re-add it to the repo-wide `NoWarn` in `Directory.Build.props`.)
 - Build and test the whole solution:
 
   ```shell
@@ -47,7 +49,7 @@ The library is a single sealed partial class — `SemVer` — in `src/Invex.Sema
 ### Public surface
 
 Every public member must be annotated with `[PublicAPI]` (JetBrains.Annotations). The in-repo
-analyser (`DecSm.Analyzers.PublicApiSurface`) flags anything missing, and warnings are errors.
+analyser (`Invex.RepoUtils.PublicApiAnalyzers`) flags anything missing, and warnings are errors.
 
 ## Atom workflows
 
@@ -102,21 +104,38 @@ analyser (`DecSm.Analyzers.PublicApiSurface`) flags anything missing, and warnin
 3. Add `[JsonIgnore]` if it is a computed property that should not appear in JSON serialization.
 4. Add unit tests in `SemVerTests.cs` covering happy paths and edge cases.
 5. Update `PublicApiTests.VerifyPublicApiSurface.verified.txt` (see the Verify workflow above).
-6. Update the relevant `docs/` page and `api/SemVer.md`.
+6. Update the relevant `docs/` page; the XML docs on the member are its API reference.
+
+## Documentation
+
+Docs follow the shared Invex documentation standard used by every Invex library:
+
+- **README.md** is also the NuGet readme. Keep the fixed section order (title, badges, pitch, Features,
+  Installation, Quick start, Usage, Documentation, Development, License) and use absolute links only
+  (`https://github.com/Invex-Games/semantic-version/blob/main/...` or the docs site), so they work on nuget.org.
+- **DocFX site** (`docfx.json`, `toc.yml`, `index.md`, `docs/`, `api/index.md`), published to
+  https://invex-games.github.io/semantic-version/. `docs/introduction.md` and `docs/getting-started.md` come first; every page
+  opens with one to three sentences on what it covers and ends with a "See also" or "Next steps" list. Link API
+  types with `<xref:Namespace.Type>`, not file paths.
+- **`api/index.md`** is the only hand-written file under `api/`; everything else there is generated. Put per-type
+  detail in XML docs, not in hand-written API pages.
+- **XML docs are enforced.** `CS1591` is not suppressed for shipped projects, so every public type and member needs
+  `<summary>`, plus `<param>`, `<typeparam>`, `<returns>` and `<exception>` where they apply, `<remarks>` for
+  non-obvious behaviour, and `<see cref>`/`<paramref>`/`<see langword>` for references.
 
 ## Defer to the docs
 
 For anything beyond the above, prefer these over duplicating detail:
 
-- [README.md](../README.md) — package overview and quick start.
-- [docs/index.md](../docs/index.md) — documentation home with a full table of contents.
-- [docs/getting-started.md](../docs/getting-started.md) — installation and first examples.
-- [docs/parsing.md](../docs/parsing.md) — all parsing overloads and validation rules.
-- [docs/comparison.md](../docs/comparison.md) — SemVer precedence rules and operators.
-- [docs/range-checks.md](../docs/range-checks.md) — `IsBetween` in depth.
-- [docs/string-conversion.md](../docs/string-conversion.md) — implicit `string ↔ SemVer` conversions.
-- [docs/json-serialization.md](../docs/json-serialization.md) — `System.Text.Json` round-trip support.
-- [docs/system-version-interop.md](../docs/system-version-interop.md) — converting to/from `System.Version`.
-- [docs/build-numbers.md](../docs/build-numbers.md) — `BuildNumberFromPreRelease`, `BuildNumberFromMetadata`, `ExtractBuildNumber`.
-- [api/SemVer.md](../api/SemVer.md) — complete member-by-member API reference.
+- [README.md](README.md) — package overview and quick start.
+- [docs/introduction.md](docs/introduction.md) — documentation home: what the library is and why it exists.
+- [docs/getting-started.md](docs/getting-started.md) — installation and first examples.
+- [docs/parsing.md](docs/parsing.md) — all parsing overloads and validation rules.
+- [docs/comparison.md](docs/comparison.md) — SemVer precedence rules and operators.
+- [docs/range-checks.md](docs/range-checks.md) — `IsBetween` in depth.
+- [docs/string-conversion.md](docs/string-conversion.md) — implicit `string ↔ SemVer` conversions.
+- [docs/json-serialization.md](docs/json-serialization.md) — `System.Text.Json` round-trip support.
+- [docs/system-version-interop.md](docs/system-version-interop.md) — converting to/from `System.Version`.
+- [docs/build-numbers.md](docs/build-numbers.md) — `BuildNumberFromPreRelease`, `BuildNumberFromMetadata`, `ExtractBuildNumber`.
+- XML doc comments on `SemVer` (`src/Invex.SemanticVersion/SemVer.cs`), published under `api/` on the docs site — complete member-by-member API reference.
 
