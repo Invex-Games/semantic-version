@@ -14,9 +14,10 @@ The ordering follows the [SemVer 2.0.0 specification §11](https://semver.org/#s
 3. **Patch** is compared numerically when major and minor are equal.
 4. **Release > Pre-release** — when core versions are identical a release version (no pre-release) has higher precedence than any pre-release.
 5. **Pre-release identifiers** are compared dot-by-dot left-to-right:
-   - If both identifiers are purely numeric and fit in an `int` they are compared **numerically**.
-     Numeric identifiers larger than `int.MaxValue` fall back to ordinal comparison.
-   - Otherwise they are compared **lexically** (ordinal).
+   - If both identifiers consist only of digits they are compared **numerically**, whatever their length
+     (`10000000000` > `9999999999`).
+   - A numeric identifier always has **lower** precedence than an alphanumeric one (`1.0.0-9` < `1.0.0-10a`).
+   - Two alphanumeric identifiers are compared **lexically** (ordinal, ASCII order).
    - A shorter identifier list is *less than* a longer one when all common identifiers are equal.
 6. **Build metadata** is **not** considered for precedence by the spec, but this implementation uses it as a **final tiebreaker** (ordinal comparison) when everything else is equal.
 
@@ -53,8 +54,8 @@ bool eq  = a == b;  // false
 bool neq = a != b;  // true
 ```
 
-Null comparisons with `==` and `!=` are safe. The ordering operators (`<`, `<=`, `>`, `>=`) call `CompareTo`
-on the left operand, so it must not be `null`; a `null` right operand sorts before every version.
+All six operators are null-safe. `null` sorts before every version, consistent with `CompareTo`, and two `null`
+operands are equal.
 
 ```csharp
 SemVer? x = null;
@@ -64,6 +65,10 @@ bool bothNull = (x == y); // true
 SemVer? z = SemVer.Parse("1.0.0");
 bool leftNull = (x == z);  // false
 bool rightNull = (z == x); // false
+
+bool lower = x < z;        // true — null precedes every version
+bool higher = z > x;       // true
+bool nullsEqual = x <= y;  // true
 ```
 
 ---
@@ -82,6 +87,14 @@ SemVer.Parse("1.0.0-alpha") < SemVer.Parse("1.0.0")   // true
 ```csharp
 // 10 > 9 numerically (not "10" < "9" lexically)
 SemVer.Parse("1.0.0-alpha.10") > SemVer.Parse("1.0.0-alpha.9"); // true
+```
+
+### Numeric identifiers precede alphanumeric ones
+
+```csharp
+// A purely numeric identifier always has lower precedence than an alphanumeric one
+SemVer.Parse("1.0.0-alpha.1") < SemVer.Parse("1.0.0-alpha.beta"); // true
+SemVer.Parse("1.0.0-9") < SemVer.Parse("1.0.0-10a");              // true
 ```
 
 ### Lexicographic pre-release comparison

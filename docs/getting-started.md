@@ -11,8 +11,7 @@ new to the library.
 |-----------------|-------------|
 | .NET 10.0       | .NET SDK 10 |
 
-The package references `JetBrains.Annotations` and `System.IO.Abstractions`, which NuGet restores
-automatically.
+The package references `JetBrains.Annotations`, which NuGet restores automatically.
 
 ---
 
