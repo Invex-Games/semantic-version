@@ -49,8 +49,9 @@ SemVer.Parse("1.0.0+1.2").BuildNumberFromMetadata;       // 0 — multiple numbe
 
 ## `ExtractBuildNumber(string? input)` — static helper
 
-The static `ExtractBuildNumber` method is the underlying implementation used by both properties above.  
-You can call it directly on any arbitrary string:
+The static `ExtractBuildNumber` method applies the same extraction rules as both properties above, except that it
+throws instead of returning `0` when the number overflows (see the note below). You can call it directly on any
+arbitrary string:
 
 ```csharp
 SemVer.ExtractBuildNumber("rc.42");          // 42
@@ -77,7 +78,9 @@ SemVer.ExtractBuildNumber("   ");            // 0
 | Zero or more than one numeric sequence | `0` |
 
 > [!NOTE]
-> A single numeric sequence larger than `int.MaxValue` throws `OverflowException`.
+> A single numeric sequence larger than `int.MaxValue` makes `ExtractBuildNumber` throw `OverflowException`.
+> The `BuildNumberFromPreRelease` and `BuildNumberFromMetadata` properties never throw; they return `0` in that case,
+> for example for timestamp metadata such as `1.0.0+20261014123045`.
 
 ---
 

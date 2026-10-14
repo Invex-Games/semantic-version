@@ -11,14 +11,16 @@
 ///     <list type="bullet">
 ///         <item>Release versions (without pre-release) are greater than pre-release versions</item>
 ///         <item>Pre-release versions are compared lexicographically by dot-separated identifiers</item>
-///         <item>Numeric identifiers in pre-release are compared numerically</item>
+///         <item>
+///             Numeric identifiers in pre-release are compared numerically (of any length) and have lower precedence
+///             than alphanumeric identifiers
+///         </item>
 ///         <item>Metadata is used only as a final tiebreaker when all other components are equal</item>
 ///     </list>
 ///     <para>
 ///         Create instances with <see cref="Parse(string)" />, <see cref="TryParse(string, out SemVer)" />,
 ///         <see cref="FromSystemVersion" /> or the implicit conversion from <see cref="string" />. The public
-///         parameterless constructor creates version <c>0.0.0</c>; because all properties have private
-///         <see langword="init" /> accessors, it cannot be used to set components.
+///         parameterless constructor is obsolete: it always creates version <c>0.0.0</c> and cannot set components.
 ///     </para>
 ///     <para>
 ///         The type implements <see cref="ISpanParsable{TSelf}" />, <see cref="IComparable{T}" /> and
@@ -42,9 +44,20 @@
 /// </code>
 /// </example>
 [PublicAPI]
-public sealed partial class SemVer()
+public sealed partial class SemVer
     : ISpanParsable<SemVer>, IComparable<SemVer>, IComparisonOperators<SemVer, SemVer, bool>
 {
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="SemVer" /> class representing version <c>0.0.0</c>.
+    /// </summary>
+    /// <remarks>
+    ///     This constructor was exposed unintentionally. All properties have private <see langword="init" />
+    ///     accessors, so it cannot be used to set components; it always creates version <c>0.0.0</c>.
+    /// </remarks>
+    [Obsolete(
+        "Use SemVer.Parse, SemVer.TryParse, SemVer.FromSystemVersion or SemVer.One instead. This constructor always creates version 0.0.0 and will be removed in a future major version.")]
+    public SemVer() { }
+
     /// <summary>
     ///     Initializes a new instance of the <see cref="SemVer" /> class with the specified version components.
     ///     This constructor is used for JSON deserialization.
@@ -55,7 +68,7 @@ public sealed partial class SemVer()
     /// <param name="preRelease">The pre-release version identifier, or null if not a pre-release.</param>
     /// <param name="metadata">The build metadata, or null if no metadata is present.</param>
     [JsonConstructor]
-    private SemVer(int major, int minor, int patch, string? preRelease, string? metadata) : this()
+    private SemVer(int major, int minor, int patch, string? preRelease, string? metadata)
     {
         Major = major;
         Minor = minor;
@@ -125,12 +138,11 @@ public sealed partial class SemVer()
     ///     (including when <see cref="PreRelease" /> is <see langword="null" />).
     /// </value>
     /// <remarks>
-    ///     This property uses <see cref="ExtractBuildNumber" /> to parse the pre-release string.
-    ///     Only returns a non-zero value if exactly one numeric sequence is present.
+    ///     This property applies the same rules as <see cref="ExtractBuildNumber" /> to the pre-release string.
+    ///     Only returns a non-zero value if exactly one numeric sequence is present. Unlike
+    ///     <see cref="ExtractBuildNumber" />, it never throws: a single numeric sequence greater than
+    ///     <see cref="int.MaxValue" /> also returns <c>0</c>.
     /// </remarks>
-    /// <exception cref="OverflowException">
-    ///     Thrown when the single numeric sequence is greater than <see cref="int.MaxValue" />.
-    /// </exception>
     /// <example>
     ///     <code>
     /// SemVer.Parse("1.0.0-rc.42").BuildNumberFromPreRelease; // 42
@@ -140,7 +152,7 @@ public sealed partial class SemVer()
     /// </code>
     /// </example>
     [JsonIgnore]
-    public int BuildNumberFromPreRelease => ExtractBuildNumber(PreRelease);
+    public int BuildNumberFromPreRelease => ExtractBuildNumberOrZero(PreRelease);
 
     /// <summary>
     ///     Gets the build metadata.
@@ -164,12 +176,12 @@ public sealed partial class SemVer()
     ///     (including when <see cref="Metadata" /> is <see langword="null" />).
     /// </value>
     /// <remarks>
-    ///     This property uses <see cref="ExtractBuildNumber" /> to parse the metadata string.
-    ///     Only returns a non-zero value if exactly one numeric sequence is present.
+    ///     This property applies the same rules as <see cref="ExtractBuildNumber" /> to the metadata string.
+    ///     Only returns a non-zero value if exactly one numeric sequence is present. Unlike
+    ///     <see cref="ExtractBuildNumber" />, it never throws: a single numeric sequence greater than
+    ///     <see cref="int.MaxValue" /> (for example a timestamp such as <c>+20261014123045</c>) also returns
+    ///     <c>0</c>.
     /// </remarks>
-    /// <exception cref="OverflowException">
-    ///     Thrown when the single numeric sequence is greater than <see cref="int.MaxValue" />.
-    /// </exception>
     /// <example>
     ///     <code>
     /// SemVer.Parse("1.0.0+build.99").BuildNumberFromMetadata; // 99
@@ -178,7 +190,7 @@ public sealed partial class SemVer()
     /// </code>
     /// </example>
     [JsonIgnore]
-    public int BuildNumberFromMetadata => ExtractBuildNumber(Metadata);
+    public int BuildNumberFromMetadata => ExtractBuildNumberOrZero(Metadata);
 
     /// <summary>
     ///     Gets a semantic version representing version 1.0.0.
@@ -187,12 +199,7 @@ public sealed partial class SemVer()
     ///     A <see cref="SemVer" /> instance with <see cref="Major" /> set to 1, <see cref="Minor" /> and
     ///     <see cref="Patch" /> set to 0, and no pre-release or metadata.
     /// </value>
-    public static SemVer One { get; } = new()
-    {
-        Major = 1,
-        Minor = 0,
-        Patch = 0,
-    };
+    public static SemVer One { get; } = new(1, 0, 0, null, null);
 
     /// <summary>
     ///     Compares the current instance with another <see cref="SemVer" /> and returns an integer that indicates
@@ -211,9 +218,9 @@ public sealed partial class SemVer()
     ///         <item>Compare major, minor, and patch versions numerically</item>
     ///         <item>Pre-release versions have lower precedence than normal versions</item>
     ///         <item>
-    ///             Pre-release identifiers are compared left to right; when both identifiers parse as an
-    ///             <see cref="int" /> they are compared numerically, otherwise ordinally (so numeric identifiers
-    ///             greater than <see cref="int.MaxValue" /> are compared as strings)
+    ///             Pre-release identifiers are compared left to right: identifiers consisting only of ASCII digits
+    ///             are compared numerically (of any length, without overflow), a numeric identifier has lower
+    ///             precedence than an alphanumeric one, and alphanumeric identifiers are compared ordinally (ASCII)
     ///         </item>
     ///         <item>When all shared identifiers are equal, the version with more pre-release identifiers is greater</item>
     ///         <item>Metadata is used only as a final tiebreaker (ordinal comparison)</item>
@@ -257,21 +264,12 @@ public sealed partial class SemVer()
         var otherPreReleaseParts = other.PreRelease.Split('.');
 
         for (var i = 0; i < Math.Min(preReleaseParts.Length, otherPreReleaseParts.Length); i++)
-            if (int.TryParse(preReleaseParts[i], out var preReleasePart) &&
-                int.TryParse(otherPreReleaseParts[i], out var otherPreReleasePart))
-            {
-                var preReleasePartComparison = preReleasePart.CompareTo(otherPreReleasePart);
+        {
+            var preReleasePartComparison = ComparePreReleaseIdentifiers(preReleaseParts[i], otherPreReleaseParts[i]);
 
-                if (preReleasePartComparison != 0)
-                    return preReleasePartComparison;
-            }
-            else
-            {
-                var preReleasePartComparison = string.CompareOrdinal(preReleaseParts[i], otherPreReleaseParts[i]);
-
-                if (preReleasePartComparison != 0)
-                    return preReleasePartComparison;
-            }
+            if (preReleasePartComparison != 0)
+                return preReleasePartComparison;
+        }
 
         var preReleaseLengthComparison = preReleaseParts.Length.CompareTo(otherPreReleaseParts.Length);
 
@@ -283,58 +281,66 @@ public sealed partial class SemVer()
     /// <summary>
     ///     Determines whether <paramref name="left" /> has higher precedence than <paramref name="right" />.
     /// </summary>
-    /// <param name="left">The version to compare. Must not be <see langword="null" />.</param>
-    /// <param name="right">
-    ///     The version to compare against. A <see langword="null" /> value precedes every version.
-    /// </param>
+    /// <param name="left">The version to compare, or <see langword="null" />.</param>
+    /// <param name="right">The version to compare against, or <see langword="null" />.</param>
     /// <returns>
-    ///     <see langword="true" /> if <see cref="CompareTo" /> returns a value greater than zero;
-    ///     otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if <paramref name="left" /> compared with <paramref name="right" /> using
+    ///     <see cref="CompareTo" /> gives a value greater than zero; otherwise, <see langword="false" />.
     /// </returns>
-    public static bool operator >(SemVer left, SemVer right) =>
-        left.CompareTo(right) > 0;
+    /// <remarks>
+    ///     This operator is null-safe: <see langword="null" /> precedes every version and two
+    ///     <see langword="null" /> operands are equal, consistent with <see cref="CompareTo" />.
+    /// </remarks>
+    public static bool operator >(SemVer? left, SemVer? right) =>
+        Compare(left, right) > 0;
 
     /// <summary>
     ///     Determines whether <paramref name="left" /> has the same or higher precedence than <paramref name="right" />.
     /// </summary>
-    /// <param name="left">The version to compare. Must not be <see langword="null" />.</param>
-    /// <param name="right">
-    ///     The version to compare against. A <see langword="null" /> value precedes every version.
-    /// </param>
+    /// <param name="left">The version to compare, or <see langword="null" />.</param>
+    /// <param name="right">The version to compare against, or <see langword="null" />.</param>
     /// <returns>
-    ///     <see langword="true" /> if <see cref="CompareTo" /> returns a value greater than or equal to zero;
-    ///     otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if <paramref name="left" /> compared with <paramref name="right" /> using
+    ///     <see cref="CompareTo" /> gives a value greater than or equal to zero; otherwise, <see langword="false" />.
     /// </returns>
-    public static bool operator >=(SemVer left, SemVer right) =>
-        left.CompareTo(right) >= 0;
+    /// <remarks>
+    ///     This operator is null-safe: <see langword="null" /> precedes every version and two
+    ///     <see langword="null" /> operands are equal, consistent with <see cref="CompareTo" />.
+    /// </remarks>
+    public static bool operator >=(SemVer? left, SemVer? right) =>
+        Compare(left, right) >= 0;
 
     /// <summary>
     ///     Determines whether <paramref name="left" /> has lower precedence than <paramref name="right" />.
     /// </summary>
-    /// <param name="left">The version to compare. Must not be <see langword="null" />.</param>
-    /// <param name="right">
-    ///     The version to compare against. A <see langword="null" /> value precedes every version.
-    /// </param>
+    /// <param name="left">The version to compare, or <see langword="null" />.</param>
+    /// <param name="right">The version to compare against, or <see langword="null" />.</param>
     /// <returns>
-    ///     <see langword="true" /> if <see cref="CompareTo" /> returns a value less than zero;
-    ///     otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if <paramref name="left" /> compared with <paramref name="right" /> using
+    ///     <see cref="CompareTo" /> gives a value less than zero; otherwise, <see langword="false" />.
     /// </returns>
-    public static bool operator <(SemVer left, SemVer right) =>
-        left.CompareTo(right) < 0;
+    /// <remarks>
+    ///     This operator is null-safe: <see langword="null" /> precedes every version and two
+    ///     <see langword="null" /> operands are equal, consistent with <see cref="CompareTo" />.
+    /// </remarks>
+    public static bool operator <(SemVer? left, SemVer? right) =>
+        Compare(left, right) < 0;
 
     /// <summary>
     ///     Determines whether <paramref name="left" /> has the same or lower precedence than <paramref name="right" />.
     /// </summary>
-    /// <param name="left">The version to compare. Must not be <see langword="null" />.</param>
-    /// <param name="right">
-    ///     The version to compare against. A <see langword="null" /> value precedes every version.
-    /// </param>
+    /// <param name="left">The version to compare, or <see langword="null" />.</param>
+    /// <param name="right">The version to compare against, or <see langword="null" />.</param>
     /// <returns>
-    ///     <see langword="true" /> if <see cref="CompareTo" /> returns a value less than or equal to zero;
-    ///     otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if <paramref name="left" /> compared with <paramref name="right" /> using
+    ///     <see cref="CompareTo" /> gives a value less than or equal to zero; otherwise, <see langword="false" />.
     /// </returns>
-    public static bool operator <=(SemVer left, SemVer right) =>
-        left.CompareTo(right) <= 0;
+    /// <remarks>
+    ///     This operator is null-safe: <see langword="null" /> precedes every version and two
+    ///     <see langword="null" /> operands are equal, consistent with <see cref="CompareTo" />.
+    /// </remarks>
+    public static bool operator <=(SemVer? left, SemVer? right) =>
+        Compare(left, right) <= 0;
 
     /// <summary>
     ///     Determines whether two versions are equal.
@@ -388,18 +394,15 @@ public sealed partial class SemVer()
         if (!match.Success)
             throw new ArgumentException($"Invalid version string '{s}'.", nameof(s));
 
-        return new()
-        {
-            Major = int.Parse(match.Groups[1].Value),
-            Minor = int.Parse(match.Groups[2].Value),
-            Patch = int.Parse(match.Groups[3].Value),
-            PreRelease = string.IsNullOrWhiteSpace(match.Groups[4].Value)
+        return new(int.Parse(match.Groups[1].Value),
+            int.Parse(match.Groups[2].Value),
+            int.Parse(match.Groups[3].Value),
+            string.IsNullOrWhiteSpace(match.Groups[4].Value)
                 ? null
                 : match.Groups[4].Value,
-            Metadata = string.IsNullOrWhiteSpace(match.Groups[5].Value)
+            string.IsNullOrWhiteSpace(match.Groups[5].Value)
                 ? null
-                : match.Groups[5].Value,
-        };
+                : match.Groups[5].Value);
     }
 
     /// <summary>
@@ -452,18 +455,15 @@ public sealed partial class SemVer()
         var preRelease = match.Groups[4].Value;
         var metadata = match.Groups[5].Value;
 
-        result = new()
-        {
-            Major = major,
-            Minor = minor,
-            Patch = patch,
-            PreRelease = string.IsNullOrWhiteSpace(preRelease)
+        result = new(major,
+            minor,
+            patch,
+            string.IsNullOrWhiteSpace(preRelease)
                 ? null
                 : preRelease,
-            Metadata = string.IsNullOrWhiteSpace(metadata)
+            string.IsNullOrWhiteSpace(metadata)
                 ? null
-                : metadata,
-        };
+                : metadata);
 
         return true;
     }
@@ -559,9 +559,8 @@ public sealed partial class SemVer()
     ///     present.
     /// </exception>
     /// <exception cref="ArgumentOutOfRangeException">
-    ///     Thrown when <see cref="Major" />, <see cref="Minor" /> or <see cref="Patch" /> is negative, for example a
-    ///     <see cref="Patch" /> of <c>-1</c> produced by <see cref="FromSystemVersion" /> from a
-    ///     <see cref="System.Version" /> without a build component.
+    ///     Thrown when <see cref="Major" />, <see cref="Minor" /> or <see cref="Patch" /> is negative, which can only
+    ///     happen for an instance deserialized from JSON containing negative components.
     /// </exception>
     /// <remarks>
     ///     Maps SemVer Major.Minor.Patch to System.Version Major.Minor.Build.
@@ -598,20 +597,15 @@ public sealed partial class SemVer()
     ///         <see langword="true" />.
     ///     </para>
     ///     <para>
-    ///         <see cref="Version.Build" /> is copied as-is, so a version created without a build component (for
-    ///         example <c>new Version(1, 2)</c>, whose <see cref="Version.Build" /> is <c>-1</c>) produces a
-    ///         <see cref="Patch" /> of <c>-1</c>.
+    ///         An undefined <see cref="Version.Build" /> (<c>-1</c>, as in <c>new Version(1, 2)</c>) maps to a
+    ///         <see cref="Patch" /> of <c>0</c>, so the result is always a valid version that
+    ///         <see cref="ToSystemVersion" /> can convert back.
     ///     </para>
     /// </remarks>
     public static SemVer FromSystemVersion(Version version, bool throwIfContainsRevision = false) =>
         throwIfContainsRevision && version.Revision > 0
             ? throw new ArgumentException("The version contains a revision number, which is not supported by SemVer.")
-            : new()
-            {
-                Major = version.Major,
-                Minor = version.Minor,
-                Patch = version.Build,
-            };
+            : new(version.Major, version.Minor, Math.Max(version.Build, 0), null, null);
 
     /// <summary>
     ///     Extracts a single numeric value from the specified input string.
@@ -626,8 +620,9 @@ public sealed partial class SemVer()
     ///     Thrown when the single sequence of digits is greater than <see cref="int.MaxValue" />.
     /// </exception>
     /// <remarks>
-    ///     This method is used by <see cref="BuildNumberFromPreRelease" /> and <see cref="BuildNumberFromMetadata" />
-    ///     to extract build numbers from version components. It can be called on any string.
+    ///     <see cref="BuildNumberFromPreRelease" /> and <see cref="BuildNumberFromMetadata" /> apply the same
+    ///     extraction rules to version components, except that they return <c>0</c> instead of throwing when the
+    ///     value is greater than <see cref="int.MaxValue" />. This method can be called on any string.
     /// </remarks>
     /// <example>
     ///     <code>
@@ -808,10 +803,62 @@ public sealed partial class SemVer()
             _ => $"{Major}.{Minor}.{Patch}",
         };
 
+    /// <summary>
+    ///     Compares two versions, treating <see langword="null" /> as lower than every version.
+    /// </summary>
+    private static int Compare(SemVer? left, SemVer? right) =>
+        left is null
+            ? right is null
+                ? 0
+                : -1
+            : left.CompareTo(right);
+
+    /// <summary>
+    ///     Compares two pre-release identifiers following Semantic Versioning 2.0.0 §11.4: identifiers consisting only
+    ///     of ASCII digits are compared numerically (by length, then ordinally, so any length works without
+    ///     overflow), numeric identifiers have lower precedence than alphanumeric ones, and alphanumeric identifiers
+    ///     are compared ordinally.
+    /// </summary>
+    private static int ComparePreReleaseIdentifiers(string identifier, string otherIdentifier)
+    {
+        var isNumeric = IsNumericIdentifier(identifier);
+        var otherIsNumeric = IsNumericIdentifier(otherIdentifier);
+
+        return (isNumeric, otherIsNumeric) switch
+        {
+            (true, true) => identifier.Length != otherIdentifier.Length
+                ? identifier.Length.CompareTo(otherIdentifier.Length)
+                : string.CompareOrdinal(identifier, otherIdentifier),
+            (true, false) => -1,
+            (false, true) => 1,
+            _ => string.CompareOrdinal(identifier, otherIdentifier),
+        };
+    }
+
+    private static bool IsNumericIdentifier(string identifier) =>
+        identifier.Length > 0 && identifier.All(char.IsAsciiDigit);
+
+    /// <summary>
+    ///     Extracts a single numeric value like <see cref="ExtractBuildNumber" />, but returns <c>0</c> instead of
+    ///     throwing when the value is greater than <see cref="int.MaxValue" />.
+    /// </summary>
+    private static int ExtractBuildNumberOrZero(string? input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return 0;
+
+        var matches = NumberRegex()
+            .Matches(input);
+
+        return matches.Count is 1 && int.TryParse(matches[0].Value, out var buildNumber)
+            ? buildNumber
+            : 0;
+    }
+
     [GeneratedRegex(
-        @"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$")]
+        @"^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9][0-9]*|[0-9]*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?\z")]
     private static partial Regex SemVerRegex();
 
-    [GeneratedRegex(@"\d+")]
+    [GeneratedRegex(@"[0-9]+")]
     private static partial Regex NumberRegex();
 }

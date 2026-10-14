@@ -1,4 +1,4 @@
-namespace Invex.SemanticVersion.Tests;
+﻿namespace Invex.SemanticVersion.Tests;
 
 [TestFixture]
 internal sealed class SemVerTests
@@ -44,6 +44,43 @@ internal sealed class SemVerTests
     [TestCase("")]
     public void Parse_InvalidVersionString_ThrowsArgumentException(string versionString) =>
         Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    // Non-ASCII Unicode digits (here ARABIC-INDIC DIGIT THREE) are not valid in a semantic version
+    [TestCase("1\u0663.0.0")]
+    [TestCase("1.0.0-\u0663a")]
+    [TestCase("1.0.0-1\u0663")]
+    public void Parse_NonAsciiDigits_ThrowsArgumentException(string versionString) =>
+        Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    [TestCase("1\u0663.0.0")]
+    [TestCase("1.0.0-\u0663a")]
+    [TestCase("1.0.0-1\u0663")]
+    public void TryParse_NonAsciiDigits_ReturnsFalse(string versionString) =>
+        SemVer
+            .TryParse(versionString, out _)
+            .ShouldBeFalse();
+
+    [TestCase("1.0.0\n")]
+    [TestCase("1.0.0-alpha\n")]
+    [TestCase("1.0.0+build\n")]
+    [TestCase("\n1.0.0")]
+    public void Parse_LeadingOrTrailingNewline_ThrowsArgumentException(string versionString) =>
+        Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    [TestCase("1.0.0\n")]
+    [TestCase("1.0.0-alpha\n")]
+    [TestCase("1.0.0+build\n")]
+    [TestCase("\n1.0.0")]
+    public void TryParse_LeadingOrTrailingNewline_ReturnsFalse(string versionString) =>
+        SemVer
+            .TryParse(versionString, out _)
+            .ShouldBeFalse();
+
+    [Test]
+    public void ExtractBuildNumber_IgnoresNonAsciiDigits() =>
+        SemVer
+            .ExtractBuildNumber("rc.\u0663")
+            .ShouldBe(0);
 
     [TestCase("1.0.0", 1, 0, 0, null, null)]
     [TestCase("1.0.0-alpha+build", 1, 0, 0, "alpha", "build")]
@@ -276,6 +313,66 @@ internal sealed class SemVerTests
             .ShouldBePositive();
     }
 
+    // SemVer 2.0.0 §11.4: numeric identifiers compared numerically regardless of size
+    [TestCase("1.0.0-10000000000", "1.0.0-9999999999", 1)]
+    [TestCase("1.0.0-9999999999", "1.0.0-10000000000", -1)]
+    [TestCase("1.0.0-alpha.99999999999999999999", "1.0.0-alpha.100000000000000000000", -1)]
+    [TestCase("1.0.0-2147483648", "1.0.0-2147483647", 1)]
+    [TestCase("1.0.0-12345678901234567890", "1.0.0-12345678901234567890", 0)]
+    // §11.4.3: numeric identifiers always have lower precedence than alphanumeric identifiers
+    [TestCase("1.0.0-alpha.1", "1.0.0-alpha.beta", -1)]
+    [TestCase("1.0.0-9", "1.0.0-10a", -1)]
+    [TestCase("1.0.0-10a", "1.0.0-9", 1)]
+    [TestCase("1.0.0-1", "1.0.0--1", -1)] // "-1" is alphanumeric, not negative one
+    [TestCase("1.0.0--1", "1.0.0-1", 1)]
+    [TestCase("1.0.0-0", "1.0.0--", -1)]
+    // §11.4.2: alphanumeric identifiers compared lexically in ASCII order
+    [TestCase("1.0.0-alpha", "1.0.0-beta", -1)]
+    [TestCase("1.0.0-Alpha", "1.0.0-alpha", -1)]
+    [TestCase("1.0.0-alpha-1", "1.0.0-alpha1", -1)]
+    // §11.4.4: a larger set of identifiers has higher precedence when all preceding ones are equal
+    [TestCase("1.0.0-alpha", "1.0.0-alpha.1", -1)]
+    [TestCase("1.0.0-alpha.1", "1.0.0-alpha", 1)]
+    [TestCase("1.0.0-alpha.1", "1.0.0-alpha.1.0", -1)]
+    public void CompareTo_PreReleaseIdentifiers_FollowsSpecPrecedence(
+        string version1,
+        string version2,
+        int expectedSign)
+    {
+        var semVer1 = SemVer.Parse(version1);
+        var semVer2 = SemVer.Parse(version2);
+
+        Math
+            .Sign(semVer1.CompareTo(semVer2))
+            .ShouldBe(expectedSign);
+
+        Math
+            .Sign(semVer2.CompareTo(semVer1))
+            .ShouldBe(-expectedSign);
+    }
+
+    [Test]
+    public void CompareTo_SpecExamplePrecedenceChain_IsStrictlyIncreasing()
+    {
+        // The example from SemVer 2.0.0 §11.4
+        SemVer[] versions =
+        [
+            "1.0.0-alpha",
+            "1.0.0-alpha.1",
+            "1.0.0-alpha.beta",
+            "1.0.0-beta",
+            "1.0.0-beta.2",
+            "1.0.0-beta.11",
+            "1.0.0-rc.1",
+            "1.0.0",
+        ];
+
+        for (var i = 1; i < versions.Length; i++)
+            versions[i - 1]
+                .CompareTo(versions[i])
+                .ShouldBeNegative($"{versions[i - 1]} should precede {versions[i]}");
+    }
+
     [Test]
     public void CompareTo_BothNullPreRelease_UsesMetadataAsTiebreaker()
     {
@@ -341,6 +438,42 @@ internal sealed class SemVerTests
         var semVer2 = SemVer.Parse(version2);
 
         (semVer1 <= semVer2).ShouldBe(expectedResult);
+    }
+
+    [Test]
+    public void OrderingOperators_LeftNull_TreatNullAsLowest()
+    {
+        SemVer? left = null;
+        var right = SemVer.Parse("0.0.0-0");
+
+        left.ShouldSatisfyAllConditions(() => (left < right).ShouldBeTrue(),
+            () => (left <= right).ShouldBeTrue(),
+            () => (left > right).ShouldBeFalse(),
+            () => (left >= right).ShouldBeFalse());
+    }
+
+    [Test]
+    public void OrderingOperators_RightNull_TreatNullAsLowest()
+    {
+        var left = SemVer.Parse("0.0.0-0");
+        SemVer? right = null;
+
+        left.ShouldSatisfyAllConditions(() => (left < right).ShouldBeFalse(),
+            () => (left <= right).ShouldBeFalse(),
+            () => (left > right).ShouldBeTrue(),
+            () => (left >= right).ShouldBeTrue());
+    }
+
+    [Test]
+    public void OrderingOperators_BothNull_TreatOperandsAsEqual()
+    {
+        SemVer? left = null;
+        SemVer? right = null;
+
+        left.ShouldSatisfyAllConditions(() => (left < right).ShouldBeFalse(),
+            () => (left <= right).ShouldBeTrue(),
+            () => (left > right).ShouldBeFalse(),
+            () => (left >= right).ShouldBeTrue());
     }
 
     [TestCase("1.0.0", "1.0.0", true)]
@@ -564,6 +697,27 @@ internal sealed class SemVerTests
     }
 
     [Test]
+    public void FromSystemVersion_WithoutBuild_MapsPatchToZero()
+    {
+        var result = SemVer.FromSystemVersion(new(1, 2));
+
+        result.ShouldSatisfyAllConditions(() => result.Major.ShouldBe(1),
+            () => result.Minor.ShouldBe(2),
+            () => result.Patch.ShouldBe(0),
+            () => result.ToString().ShouldBe("1.2.0"));
+    }
+
+    [Test]
+    public void FromSystemVersion_WithoutBuild_RoundTripsThroughToSystemVersion()
+    {
+        var sysVer = SemVer
+            .FromSystemVersion(new(1, 2))
+            .ToSystemVersion();
+
+        sysVer.ShouldBe(new(1, 2, 0));
+    }
+
+    [Test]
     public void FromSystemVersion_ThrowIfRevision_WithNonZeroRevision_ThrowsArgumentException() =>
         Should.Throw<ArgumentException>(() => SemVer.FromSystemVersion(new(1, 2, 3, 4), true));
 
@@ -644,11 +798,60 @@ internal sealed class SemVerTests
             .ShouldBe(99);
 
     [Test]
+    public void BuildNumberFromPreRelease_WithNumberLargerThanInt_ReturnsZero() =>
+        SemVer
+            .Parse("1.0.0-rc.99999999999")
+            .BuildNumberFromPreRelease
+            .ShouldBe(0);
+
+    [Test]
+    public void BuildNumberFromMetadata_WithNumberLargerThanInt_ReturnsZero() =>
+        SemVer
+            .Parse("1.0.0+20261014123045")
+            .BuildNumberFromMetadata
+            .ShouldBe(0);
+
+    [Test]
+    public void ExtractBuildNumber_WithNumberLargerThanInt_ThrowsOverflowException() =>
+        Should.Throw<OverflowException>(() => SemVer.ExtractBuildNumber("rc.99999999999"));
+
+    [Test]
     public void BuildNumberFromMetadata_WithNoMetadata_ReturnsZero() =>
         SemVer
             .Parse("1.0.0")
             .BuildNumberFromMetadata
             .ShouldBe(0);
+
+    [Test]
+    public void ParameterlessConstructor_IsObsoleteAndCreatesZeroVersion()
+    {
+        typeof(SemVer)
+            .GetConstructor(Type.EmptyTypes)!
+            .GetCustomAttributes(typeof(ObsoleteAttribute), false)
+            .ShouldNotBeEmpty();
+
+#pragma warning disable CS0618 // Type or member is obsolete
+        var semVer = new SemVer();
+#pragma warning restore CS0618
+
+        semVer
+            .ToString()
+            .ShouldBe("0.0.0");
+    }
+
+    [Test]
+    public void JsonSerialization_Deserialize_UsesComponentConstructor()
+    {
+        var restored =
+            JsonSerializer.Deserialize<SemVer>(
+                """{"Major":1,"Minor":2,"Patch":3,"PreRelease":"rc.1","Metadata":"build.5"}""");
+
+        restored.ShouldNotBeNull();
+
+        restored
+            .ToString()
+            .ShouldBe("1.2.3-rc.1+build.5");
+    }
 
     [TestCase("1.0.0")]
     [TestCase("1.0.0-alpha")]
