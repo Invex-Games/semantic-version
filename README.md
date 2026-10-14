@@ -3,7 +3,7 @@
 [![Build](https://github.com/Invex-Games/semantic-version/actions/workflows/Build.yml/badge.svg)](https://github.com/Invex-Games/semantic-version/actions/workflows/Build.yml)
 [![NuGet](https://img.shields.io/nuget/v/Invex.SemanticVersion.svg)](https://www.nuget.org/packages/Invex.SemanticVersion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Invex-Games/semantic-version/blob/main/LICENSE.txt)
-[![.NET](https://img.shields.io/badge/.NET-8.0%20%7C%209.0%20%7C%2010.0-512BD4.svg)](https://dotnet.microsoft.com/)
+[![.NET](https://img.shields.io/badge/.NET-10.0-512BD4.svg)](https://dotnet.microsoft.com/)
 
 A small C# implementation of [Semantic Versioning 2.0.0](https://semver.org/).
 It provides a single immutable `SemVer` type for **parsing**, **comparing**, **serializing**, and
