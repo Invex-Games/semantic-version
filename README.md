@@ -12,7 +12,7 @@ It provides a single immutable `SemVer` type for **parsing**, **comparing**, **s
 ## Features
 
 - **Spec-compliant parsing.** Parses `MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]` using the official SemVer regex.
-- **Correct precedence comparison.** Release > pre-release, numeric identifiers (up to `int.MaxValue`) compared numerically, longer pre-release wins on tie.
+- **Correct precedence comparison.** Release > pre-release, numeric identifiers (of any length) compared numerically and ranked below alphanumeric ones, longer pre-release wins on tie.
 - **Familiar BCL surface.** Implements `ISpanParsable<SemVer>`, `IComparable<SemVer>`, and `IComparisonOperators<SemVer, SemVer, bool>`.
 - **`System.Text.Json` support.** Round-trips through `JsonSerializer` out of the box, with no custom converter.
 - **Implicit conversions.** Converts to and from `string`, plus interop with `System.Version`.
@@ -25,8 +25,7 @@ Install from [NuGet](https://www.nuget.org/packages/Invex.SemanticVersion):
 dotnet add package Invex.SemanticVersion
 ```
 
-The package targets .NET 10.0. It references `JetBrains.Annotations` and
-`System.IO.Abstractions`, which NuGet restores automatically.
+The package targets .NET 10.0. It references `JetBrains.Annotations`, which NuGet restores automatically.
 
 ## Quick start
 

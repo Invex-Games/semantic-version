@@ -77,8 +77,8 @@ SemVer v = SemVer.FromSystemVersion(new Version(1, 2, 3, 4));
 ```
 
 > [!NOTE]
-> `Build` is copied to `Patch` as-is. A `System.Version` created without a build component, such as
-> `new Version(1, 2)`, has `Build == -1`, so the resulting `SemVer` has `Patch == -1`.
+> A `System.Version` created without a build component, such as `new Version(1, 2)`, has `Build == -1`. That
+> undefined build maps to `Patch == 0`, so `SemVer.FromSystemVersion(new Version(1, 2))` is `1.2.0`.
 
 ### Guard flag
 

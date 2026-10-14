@@ -77,7 +77,9 @@ SemVer.ExtractBuildNumber("   ");            // 0
 | Zero or more than one numeric sequence | `0` |
 
 > [!NOTE]
-> A single numeric sequence larger than `int.MaxValue` throws `OverflowException`.
+> A single numeric sequence larger than `int.MaxValue` makes `ExtractBuildNumber` throw `OverflowException`.
+> The `BuildNumberFromPreRelease` and `BuildNumberFromMetadata` properties never throw; they return `0` in that case,
+> for example for timestamp metadata such as `1.0.0+20261014123045`.
 
 ---
 

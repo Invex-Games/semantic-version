@@ -7,9 +7,28 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- Pre-release precedence now follows SemVer 2.0.0 §11.4 exactly: numeric identifiers of any length are compared
+  numerically (previously identifiers larger than `int.MaxValue` were compared as strings), numeric identifiers always
+  have lower precedence than alphanumeric ones (previously `1.0.0-9` > `1.0.0-10a` and `1.0.0-1` > `1.0.0--1`), and
+  identifiers such as `-1` are no longer parsed as negative numbers.
+- The ordering operators `<`, `<=`, `>` and `>=` are null-safe: `null` precedes every version, so a `null` left
+  operand no longer throws `NullReferenceException`.
+- `FromSystemVersion` maps an undefined `Version.Build` (`-1`, as in `new Version(1, 2)`) to a `Patch` of `0`
+  instead of `-1`, so `ToSystemVersion` no longer throws on the result.
+- `BuildNumberFromPreRelease` and `BuildNumberFromMetadata` return `0` instead of throwing `OverflowException` when
+  the single number is larger than `int.MaxValue`. `ExtractBuildNumber` still throws in that case.
+
+### Deprecated
+
+- The public parameterless constructor `SemVer()`. It always creates `0.0.0`; use `Parse`, `TryParse`,
+  `FromSystemVersion` or `One` instead.
+
 ### Removed
 
 - The .NET 8.0 and .NET 9.0 targets. The package now targets .NET 10.0 only.
+- The unused `System.IO.Abstractions` package dependency.
 
 ---
 
