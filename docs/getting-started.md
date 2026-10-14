@@ -9,8 +9,6 @@ new to the library.
 
 | Target Framework | Minimum SDK |
 |-----------------|-------------|
-| .NET 8.0        | .NET SDK 8  |
-| .NET 9.0        | .NET SDK 9  |
 | .NET 10.0       | .NET SDK 10 |
 
 The package references `JetBrains.Annotations` and `System.IO.Abstractions`, which NuGet restores
