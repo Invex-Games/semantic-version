@@ -20,6 +20,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `BuildNumberFromPreRelease` and `BuildNumberFromMetadata` return `0` instead of throwing `OverflowException` when
   the single number is larger than `int.MaxValue`. `ExtractBuildNumber` still throws in that case.
 
+- Parsing accepts only ASCII digits. Non-ASCII Unicode digits (for example `1٣.0.0`) previously made `Parse` throw
+  `FormatException`, or were accepted inside pre-release identifiers. Now `Parse` throws `ArgumentException` and
+  `TryParse` returns `false`. `ExtractBuildNumber` and the build number properties ignore non-ASCII digits.
+
 ### Deprecated
 
 - The public parameterless constructor `SemVer()`. It always creates `0.0.0`; use `Parse`, `TryParse`,

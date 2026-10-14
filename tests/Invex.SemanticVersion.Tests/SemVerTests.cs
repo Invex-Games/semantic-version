@@ -1,4 +1,4 @@
-namespace Invex.SemanticVersion.Tests;
+﻿namespace Invex.SemanticVersion.Tests;
 
 [TestFixture]
 internal sealed class SemVerTests
@@ -44,6 +44,27 @@ internal sealed class SemVerTests
     [TestCase("")]
     public void Parse_InvalidVersionString_ThrowsArgumentException(string versionString) =>
         Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    // Non-ASCII Unicode digits (here ARABIC-INDIC DIGIT THREE) are not valid in a semantic version
+    [TestCase("1\u0663.0.0")]
+    [TestCase("1.0.0-\u0663a")]
+    [TestCase("1.0.0-1\u0663")]
+    public void Parse_NonAsciiDigits_ThrowsArgumentException(string versionString) =>
+        Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    [TestCase("1\u0663.0.0")]
+    [TestCase("1.0.0-\u0663a")]
+    [TestCase("1.0.0-1\u0663")]
+    public void TryParse_NonAsciiDigits_ReturnsFalse(string versionString) =>
+        SemVer
+            .TryParse(versionString, out _)
+            .ShouldBeFalse();
+
+    [Test]
+    public void ExtractBuildNumber_IgnoresNonAsciiDigits() =>
+        SemVer
+            .ExtractBuildNumber("rc.\u0663")
+            .ShouldBe(0);
 
     [TestCase("1.0.0", 1, 0, 0, null, null)]
     [TestCase("1.0.0-alpha+build", 1, 0, 0, "alpha", "build")]
