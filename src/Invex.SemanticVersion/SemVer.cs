@@ -620,8 +620,9 @@ public sealed partial class SemVer
     ///     Thrown when the single sequence of digits is greater than <see cref="int.MaxValue" />.
     /// </exception>
     /// <remarks>
-    ///     This method is used by <see cref="BuildNumberFromPreRelease" /> and <see cref="BuildNumberFromMetadata" />
-    ///     to extract build numbers from version components. It can be called on any string.
+    ///     <see cref="BuildNumberFromPreRelease" /> and <see cref="BuildNumberFromMetadata" /> apply the same
+    ///     extraction rules to version components, except that they return <c>0</c> instead of throwing when the
+    ///     value is greater than <see cref="int.MaxValue" />. This method can be called on any string.
     /// </remarks>
     /// <example>
     ///     <code>
