@@ -60,6 +60,22 @@ internal sealed class SemVerTests
             .TryParse(versionString, out _)
             .ShouldBeFalse();
 
+    [TestCase("1.0.0\n")]
+    [TestCase("1.0.0-alpha\n")]
+    [TestCase("1.0.0+build\n")]
+    [TestCase("\n1.0.0")]
+    public void Parse_LeadingOrTrailingNewline_ThrowsArgumentException(string versionString) =>
+        Should.Throw<ArgumentException>(() => SemVer.Parse(versionString));
+
+    [TestCase("1.0.0\n")]
+    [TestCase("1.0.0-alpha\n")]
+    [TestCase("1.0.0+build\n")]
+    [TestCase("\n1.0.0")]
+    public void TryParse_LeadingOrTrailingNewline_ReturnsFalse(string versionString) =>
+        SemVer
+            .TryParse(versionString, out _)
+            .ShouldBeFalse();
+
     [Test]
     public void ExtractBuildNumber_IgnoresNonAsciiDigits() =>
         SemVer

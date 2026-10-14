@@ -24,6 +24,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   `FormatException`, or were accepted inside pre-release identifiers. Now `Parse` throws `ArgumentException` and
   `TryParse` returns `false`. `ExtractBuildNumber` and the build number properties ignore non-ASCII digits.
 
+- Parsing rejects a trailing newline (for example `"1.0.0\n"`), which was previously accepted. `Parse` now throws
+  `ArgumentException` and `TryParse` returns `false`.
+
 ### Deprecated
 
 - The public parameterless constructor `SemVer()`. It always creates `0.0.0`; use `Parse`, `TryParse`,
