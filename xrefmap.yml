@@ -1,0 +1,511 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Invex.SemanticVersion
+  name: Invex.SemanticVersion
+  href: api/Invex.SemanticVersion.html
+  commentId: N:Invex.SemanticVersion
+  fullName: Invex.SemanticVersion
+  nameWithType: Invex.SemanticVersion
+- uid: Invex.SemanticVersion.SemVer
+  name: SemVer
+  href: api/Invex.SemanticVersion.SemVer.html
+  commentId: T:Invex.SemanticVersion.SemVer
+  fullName: Invex.SemanticVersion.SemVer
+  nameWithType: SemVer
+- uid: Invex.SemanticVersion.SemVer.#ctor
+  name: SemVer()
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer__ctor
+  commentId: M:Invex.SemanticVersion.SemVer.#ctor
+  name.vb: New()
+  fullName: Invex.SemanticVersion.SemVer.SemVer()
+  fullName.vb: Invex.SemanticVersion.SemVer.New()
+  nameWithType: SemVer.SemVer()
+  nameWithType.vb: SemVer.New()
+- uid: Invex.SemanticVersion.SemVer.#ctor*
+  name: SemVer
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer__ctor_
+  commentId: Overload:Invex.SemanticVersion.SemVer.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: Invex.SemanticVersion.SemVer.SemVer
+  fullName.vb: Invex.SemanticVersion.SemVer.New
+  nameWithType: SemVer.SemVer
+  nameWithType.vb: SemVer.New
+- uid: Invex.SemanticVersion.SemVer.BuildNumberFromMetadata
+  name: BuildNumberFromMetadata
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromMetadata
+  commentId: P:Invex.SemanticVersion.SemVer.BuildNumberFromMetadata
+  fullName: Invex.SemanticVersion.SemVer.BuildNumberFromMetadata
+  nameWithType: SemVer.BuildNumberFromMetadata
+- uid: Invex.SemanticVersion.SemVer.BuildNumberFromMetadata*
+  name: BuildNumberFromMetadata
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromMetadata_
+  commentId: Overload:Invex.SemanticVersion.SemVer.BuildNumberFromMetadata
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.BuildNumberFromMetadata
+  nameWithType: SemVer.BuildNumberFromMetadata
+- uid: Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease
+  name: BuildNumberFromPreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease
+  commentId: P:Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease
+  fullName: Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease
+  nameWithType: SemVer.BuildNumberFromPreRelease
+- uid: Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease*
+  name: BuildNumberFromPreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease_
+  commentId: Overload:Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease
+  nameWithType: SemVer.BuildNumberFromPreRelease
+- uid: Invex.SemanticVersion.SemVer.CompareTo(Invex.SemanticVersion.SemVer)
+  name: CompareTo(SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.CompareTo(Invex.SemanticVersion.SemVer)
+  name.vb: CompareTo(SemVer)
+  fullName: Invex.SemanticVersion.SemVer.CompareTo(Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.CompareTo(Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.CompareTo(SemVer?)
+  nameWithType.vb: SemVer.CompareTo(SemVer)
+- uid: Invex.SemanticVersion.SemVer.CompareTo*
+  name: CompareTo
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_
+  commentId: Overload:Invex.SemanticVersion.SemVer.CompareTo
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.CompareTo
+  nameWithType: SemVer.CompareTo
+- uid: Invex.SemanticVersion.SemVer.Equals(Invex.SemanticVersion.SemVer)
+  name: Equals(SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.Equals(Invex.SemanticVersion.SemVer)
+  name.vb: Equals(SemVer)
+  fullName: Invex.SemanticVersion.SemVer.Equals(Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.Equals(Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.Equals(SemVer?)
+  nameWithType.vb: SemVer.Equals(SemVer)
+- uid: Invex.SemanticVersion.SemVer.Equals(System.Object)
+  name: Equals(object?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_System_Object_
+  commentId: M:Invex.SemanticVersion.SemVer.Equals(System.Object)
+  name.vb: Equals(Object)
+  fullName: Invex.SemanticVersion.SemVer.Equals(object?)
+  fullName.vb: Invex.SemanticVersion.SemVer.Equals(Object)
+  nameWithType: SemVer.Equals(object?)
+  nameWithType.vb: SemVer.Equals(Object)
+- uid: Invex.SemanticVersion.SemVer.Equals*
+  name: Equals
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Equals
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Equals
+  nameWithType: SemVer.Equals
+- uid: Invex.SemanticVersion.SemVer.ExtractBuildNumber(System.String)
+  name: ExtractBuildNumber(string?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_
+  commentId: M:Invex.SemanticVersion.SemVer.ExtractBuildNumber(System.String)
+  name.vb: ExtractBuildNumber(String)
+  fullName: Invex.SemanticVersion.SemVer.ExtractBuildNumber(string?)
+  fullName.vb: Invex.SemanticVersion.SemVer.ExtractBuildNumber(String)
+  nameWithType: SemVer.ExtractBuildNumber(string?)
+  nameWithType.vb: SemVer.ExtractBuildNumber(String)
+- uid: Invex.SemanticVersion.SemVer.ExtractBuildNumber*
+  name: ExtractBuildNumber
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_
+  commentId: Overload:Invex.SemanticVersion.SemVer.ExtractBuildNumber
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.ExtractBuildNumber
+  nameWithType: SemVer.ExtractBuildNumber
+- uid: Invex.SemanticVersion.SemVer.FromSystemVersion(System.Version,System.Boolean)
+  name: FromSystemVersion(Version, bool)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_FromSystemVersion_System_Version_System_Boolean_
+  commentId: M:Invex.SemanticVersion.SemVer.FromSystemVersion(System.Version,System.Boolean)
+  name.vb: FromSystemVersion(Version, Boolean)
+  fullName: Invex.SemanticVersion.SemVer.FromSystemVersion(System.Version, bool)
+  fullName.vb: Invex.SemanticVersion.SemVer.FromSystemVersion(System.Version, Boolean)
+  nameWithType: SemVer.FromSystemVersion(Version, bool)
+  nameWithType.vb: SemVer.FromSystemVersion(Version, Boolean)
+- uid: Invex.SemanticVersion.SemVer.FromSystemVersion*
+  name: FromSystemVersion
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_FromSystemVersion_
+  commentId: Overload:Invex.SemanticVersion.SemVer.FromSystemVersion
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.FromSystemVersion
+  nameWithType: SemVer.FromSystemVersion
+- uid: Invex.SemanticVersion.SemVer.GetHashCode
+  name: GetHashCode()
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_GetHashCode
+  commentId: M:Invex.SemanticVersion.SemVer.GetHashCode
+  fullName: Invex.SemanticVersion.SemVer.GetHashCode()
+  nameWithType: SemVer.GetHashCode()
+- uid: Invex.SemanticVersion.SemVer.GetHashCode*
+  name: GetHashCode
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_GetHashCode_
+  commentId: Overload:Invex.SemanticVersion.SemVer.GetHashCode
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.GetHashCode
+  nameWithType: SemVer.GetHashCode
+- uid: Invex.SemanticVersion.SemVer.IsBetween(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: IsBetween(SemVer, SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_IsBetween_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.IsBetween(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  fullName: Invex.SemanticVersion.SemVer.IsBetween(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.IsBetween(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.IsBetween*
+  name: IsBetween
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_IsBetween_
+  commentId: Overload:Invex.SemanticVersion.SemVer.IsBetween
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.IsBetween
+  nameWithType: SemVer.IsBetween
+- uid: Invex.SemanticVersion.SemVer.IsPreRelease
+  name: IsPreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_IsPreRelease
+  commentId: P:Invex.SemanticVersion.SemVer.IsPreRelease
+  fullName: Invex.SemanticVersion.SemVer.IsPreRelease
+  nameWithType: SemVer.IsPreRelease
+- uid: Invex.SemanticVersion.SemVer.IsPreRelease*
+  name: IsPreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_IsPreRelease_
+  commentId: Overload:Invex.SemanticVersion.SemVer.IsPreRelease
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.IsPreRelease
+  nameWithType: SemVer.IsPreRelease
+- uid: Invex.SemanticVersion.SemVer.Major
+  name: Major
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major
+  commentId: P:Invex.SemanticVersion.SemVer.Major
+  fullName: Invex.SemanticVersion.SemVer.Major
+  nameWithType: SemVer.Major
+- uid: Invex.SemanticVersion.SemVer.Major*
+  name: Major
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Major
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Major
+  nameWithType: SemVer.Major
+- uid: Invex.SemanticVersion.SemVer.Metadata
+  name: Metadata
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata
+  commentId: P:Invex.SemanticVersion.SemVer.Metadata
+  fullName: Invex.SemanticVersion.SemVer.Metadata
+  nameWithType: SemVer.Metadata
+- uid: Invex.SemanticVersion.SemVer.Metadata*
+  name: Metadata
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Metadata
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Metadata
+  nameWithType: SemVer.Metadata
+- uid: Invex.SemanticVersion.SemVer.Minor
+  name: Minor
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor
+  commentId: P:Invex.SemanticVersion.SemVer.Minor
+  fullName: Invex.SemanticVersion.SemVer.Minor
+  nameWithType: SemVer.Minor
+- uid: Invex.SemanticVersion.SemVer.Minor*
+  name: Minor
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Minor
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Minor
+  nameWithType: SemVer.Minor
+- uid: Invex.SemanticVersion.SemVer.One
+  name: One
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_One
+  commentId: P:Invex.SemanticVersion.SemVer.One
+  fullName: Invex.SemanticVersion.SemVer.One
+  nameWithType: SemVer.One
+- uid: Invex.SemanticVersion.SemVer.One*
+  name: One
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_One_
+  commentId: Overload:Invex.SemanticVersion.SemVer.One
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.One
+  nameWithType: SemVer.One
+- uid: Invex.SemanticVersion.SemVer.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)
+  name: Parse(ReadOnlySpan<char>, IFormatProvider?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_ReadOnlySpan_System_Char__System_IFormatProvider_
+  commentId: M:Invex.SemanticVersion.SemVer.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)
+  name.vb: Parse(ReadOnlySpan(Of Char), IFormatProvider)
+  fullName: Invex.SemanticVersion.SemVer.Parse(System.ReadOnlySpan<char>, System.IFormatProvider?)
+  fullName.vb: Invex.SemanticVersion.SemVer.Parse(System.ReadOnlySpan(Of Char), System.IFormatProvider)
+  nameWithType: SemVer.Parse(ReadOnlySpan<char>, IFormatProvider?)
+  nameWithType.vb: SemVer.Parse(ReadOnlySpan(Of Char), IFormatProvider)
+- uid: Invex.SemanticVersion.SemVer.Parse(System.String)
+  name: Parse(string)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_
+  commentId: M:Invex.SemanticVersion.SemVer.Parse(System.String)
+  name.vb: Parse(String)
+  fullName: Invex.SemanticVersion.SemVer.Parse(string)
+  fullName.vb: Invex.SemanticVersion.SemVer.Parse(String)
+  nameWithType: SemVer.Parse(string)
+  nameWithType.vb: SemVer.Parse(String)
+- uid: Invex.SemanticVersion.SemVer.Parse(System.String,System.IFormatProvider)
+  name: Parse(string, IFormatProvider?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_System_IFormatProvider_
+  commentId: M:Invex.SemanticVersion.SemVer.Parse(System.String,System.IFormatProvider)
+  name.vb: Parse(String, IFormatProvider)
+  fullName: Invex.SemanticVersion.SemVer.Parse(string, System.IFormatProvider?)
+  fullName.vb: Invex.SemanticVersion.SemVer.Parse(String, System.IFormatProvider)
+  nameWithType: SemVer.Parse(string, IFormatProvider?)
+  nameWithType.vb: SemVer.Parse(String, IFormatProvider)
+- uid: Invex.SemanticVersion.SemVer.Parse*
+  name: Parse
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Parse
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Parse
+  nameWithType: SemVer.Parse
+- uid: Invex.SemanticVersion.SemVer.Patch
+  name: Patch
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch
+  commentId: P:Invex.SemanticVersion.SemVer.Patch
+  fullName: Invex.SemanticVersion.SemVer.Patch
+  nameWithType: SemVer.Patch
+- uid: Invex.SemanticVersion.SemVer.Patch*
+  name: Patch
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Patch
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Patch
+  nameWithType: SemVer.Patch
+- uid: Invex.SemanticVersion.SemVer.PreRelease
+  name: PreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease
+  commentId: P:Invex.SemanticVersion.SemVer.PreRelease
+  fullName: Invex.SemanticVersion.SemVer.PreRelease
+  nameWithType: SemVer.PreRelease
+- uid: Invex.SemanticVersion.SemVer.PreRelease*
+  name: PreRelease
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease_
+  commentId: Overload:Invex.SemanticVersion.SemVer.PreRelease
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.PreRelease
+  nameWithType: SemVer.PreRelease
+- uid: Invex.SemanticVersion.SemVer.Prefix
+  name: Prefix
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Prefix
+  commentId: P:Invex.SemanticVersion.SemVer.Prefix
+  fullName: Invex.SemanticVersion.SemVer.Prefix
+  nameWithType: SemVer.Prefix
+- uid: Invex.SemanticVersion.SemVer.Prefix*
+  name: Prefix
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Prefix_
+  commentId: Overload:Invex.SemanticVersion.SemVer.Prefix
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.Prefix
+  nameWithType: SemVer.Prefix
+- uid: Invex.SemanticVersion.SemVer.ToString
+  name: ToString()
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToString
+  commentId: M:Invex.SemanticVersion.SemVer.ToString
+  fullName: Invex.SemanticVersion.SemVer.ToString()
+  nameWithType: SemVer.ToString()
+- uid: Invex.SemanticVersion.SemVer.ToString*
+  name: ToString
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToString_
+  commentId: Overload:Invex.SemanticVersion.SemVer.ToString
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.ToString
+  nameWithType: SemVer.ToString
+- uid: Invex.SemanticVersion.SemVer.ToSystemVersion(System.Boolean,System.Boolean)
+  name: ToSystemVersion(bool, bool)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToSystemVersion_System_Boolean_System_Boolean_
+  commentId: M:Invex.SemanticVersion.SemVer.ToSystemVersion(System.Boolean,System.Boolean)
+  name.vb: ToSystemVersion(Boolean, Boolean)
+  fullName: Invex.SemanticVersion.SemVer.ToSystemVersion(bool, bool)
+  fullName.vb: Invex.SemanticVersion.SemVer.ToSystemVersion(Boolean, Boolean)
+  nameWithType: SemVer.ToSystemVersion(bool, bool)
+  nameWithType.vb: SemVer.ToSystemVersion(Boolean, Boolean)
+- uid: Invex.SemanticVersion.SemVer.ToSystemVersion*
+  name: ToSystemVersion
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToSystemVersion_
+  commentId: Overload:Invex.SemanticVersion.SemVer.ToSystemVersion
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.ToSystemVersion
+  nameWithType: SemVer.ToSystemVersion
+- uid: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},Invex.SemanticVersion.SemVer@)
+  name: TryParse(ReadOnlySpan<char>, out SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__Invex_SemanticVersion_SemVer__
+  commentId: M:Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},Invex.SemanticVersion.SemVer@)
+  name.vb: TryParse(ReadOnlySpan(Of Char), SemVer)
+  fullName: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan<char>, out Invex.SemanticVersion.SemVer)
+  fullName.vb: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan(Of Char), Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.TryParse(ReadOnlySpan<char>, out SemVer)
+  nameWithType.vb: SemVer.TryParse(ReadOnlySpan(Of Char), SemVer)
+- uid: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Invex.SemanticVersion.SemVer@)
+  name: TryParse(ReadOnlySpan<char>, IFormatProvider?, out SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__System_IFormatProvider_Invex_SemanticVersion_SemVer__
+  commentId: M:Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Invex.SemanticVersion.SemVer@)
+  name.vb: TryParse(ReadOnlySpan(Of Char), IFormatProvider, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan<char>, System.IFormatProvider?, out Invex.SemanticVersion.SemVer)
+  fullName.vb: Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan(Of Char), System.IFormatProvider, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.TryParse(ReadOnlySpan<char>, IFormatProvider?, out SemVer)
+  nameWithType.vb: SemVer.TryParse(ReadOnlySpan(Of Char), IFormatProvider, SemVer)
+- uid: Invex.SemanticVersion.SemVer.TryParse(System.String,Invex.SemanticVersion.SemVer@)
+  name: TryParse(string?, out SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer__
+  commentId: M:Invex.SemanticVersion.SemVer.TryParse(System.String,Invex.SemanticVersion.SemVer@)
+  name.vb: TryParse(String, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.TryParse(string?, out Invex.SemanticVersion.SemVer)
+  fullName.vb: Invex.SemanticVersion.SemVer.TryParse(String, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.TryParse(string?, out SemVer)
+  nameWithType.vb: SemVer.TryParse(String, SemVer)
+- uid: Invex.SemanticVersion.SemVer.TryParse(System.String,System.IFormatProvider,Invex.SemanticVersion.SemVer@)
+  name: TryParse(string?, IFormatProvider?, out SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_System_IFormatProvider_Invex_SemanticVersion_SemVer__
+  commentId: M:Invex.SemanticVersion.SemVer.TryParse(System.String,System.IFormatProvider,Invex.SemanticVersion.SemVer@)
+  name.vb: TryParse(String, IFormatProvider, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.TryParse(string?, System.IFormatProvider?, out Invex.SemanticVersion.SemVer)
+  fullName.vb: Invex.SemanticVersion.SemVer.TryParse(String, System.IFormatProvider, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.TryParse(string?, IFormatProvider?, out SemVer)
+  nameWithType.vb: SemVer.TryParse(String, IFormatProvider, SemVer)
+- uid: Invex.SemanticVersion.SemVer.TryParse*
+  name: TryParse
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_
+  commentId: Overload:Invex.SemanticVersion.SemVer.TryParse
+  isSpec: "True"
+  fullName: Invex.SemanticVersion.SemVer.TryParse
+  nameWithType: SemVer.TryParse
+- uid: Invex.SemanticVersion.SemVer.op_Equality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator ==(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Equality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_Equality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: =(SemVer, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.operator ==(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.=(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator ==(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.=(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_Equality*
+  name: operator ==
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Equality_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_Equality
+  isSpec: "True"
+  name.vb: =
+  fullName: Invex.SemanticVersion.SemVer.operator ==
+  fullName.vb: Invex.SemanticVersion.SemVer.=
+  nameWithType: SemVer.operator ==
+  nameWithType.vb: SemVer.=
+- uid: Invex.SemanticVersion.SemVer.op_GreaterThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator >(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_GreaterThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_GreaterThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: '>(SemVer, SemVer)'
+  fullName: Invex.SemanticVersion.SemVer.operator >(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.>(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator >(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.>(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_GreaterThan*
+  name: operator >
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_GreaterThan_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_GreaterThan
+  isSpec: "True"
+  name.vb: '>'
+  fullName: Invex.SemanticVersion.SemVer.operator >
+  fullName.vb: Invex.SemanticVersion.SemVer.>
+  nameWithType: SemVer.operator >
+  nameWithType.vb: SemVer.>
+- uid: Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator >=(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_GreaterThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: '>=(SemVer, SemVer)'
+  fullName: Invex.SemanticVersion.SemVer.operator >=(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.>=(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator >=(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.>=(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual*
+  name: operator >=
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_GreaterThanOrEqual_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual
+  isSpec: "True"
+  name.vb: '>='
+  fullName: Invex.SemanticVersion.SemVer.operator >=
+  fullName.vb: Invex.SemanticVersion.SemVer.>=
+  nameWithType: SemVer.operator >=
+  nameWithType.vb: SemVer.>=
+- uid: Invex.SemanticVersion.SemVer.op_Implicit(Invex.SemanticVersion.SemVer)~System.String
+  name: implicit operator string(SemVer)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Implicit_Invex_SemanticVersion_SemVer__System_String
+  commentId: M:Invex.SemanticVersion.SemVer.op_Implicit(Invex.SemanticVersion.SemVer)~System.String
+  name.vb: CType(SemVer)
+  fullName: Invex.SemanticVersion.SemVer.implicit operator string(Invex.SemanticVersion.SemVer)
+  fullName.vb: Invex.SemanticVersion.SemVer.CType(Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.implicit operator string(SemVer)
+  nameWithType.vb: SemVer.CType(SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_Implicit(System.String)~Invex.SemanticVersion.SemVer
+  name: implicit operator SemVer(string)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Implicit_System_String__Invex_SemanticVersion_SemVer
+  commentId: M:Invex.SemanticVersion.SemVer.op_Implicit(System.String)~Invex.SemanticVersion.SemVer
+  name.vb: CType(String)
+  fullName: Invex.SemanticVersion.SemVer.implicit operator Invex.SemanticVersion.SemVer(string)
+  fullName.vb: Invex.SemanticVersion.SemVer.CType(String)
+  nameWithType: SemVer.implicit operator SemVer(string)
+  nameWithType.vb: SemVer.CType(String)
+- uid: Invex.SemanticVersion.SemVer.op_Implicit*
+  name: implicit operator
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Implicit_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_Implicit
+  isSpec: "True"
+  name.vb: CType
+  fullName: Invex.SemanticVersion.SemVer.implicit operator
+  fullName.vb: Invex.SemanticVersion.SemVer.CType
+  nameWithType: SemVer.implicit operator
+  nameWithType.vb: SemVer.CType
+- uid: Invex.SemanticVersion.SemVer.op_Inequality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator !=(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Inequality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_Inequality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: <>(SemVer, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.operator !=(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.<>(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator !=(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.<>(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_Inequality*
+  name: operator !=
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_Inequality_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_Inequality
+  isSpec: "True"
+  name.vb: <>
+  fullName: Invex.SemanticVersion.SemVer.operator !=
+  fullName.vb: Invex.SemanticVersion.SemVer.<>
+  nameWithType: SemVer.operator !=
+  nameWithType.vb: SemVer.<>
+- uid: Invex.SemanticVersion.SemVer.op_LessThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator <(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_LessThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_LessThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: <(SemVer, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.operator <(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.<(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator <(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.<(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_LessThan*
+  name: operator <
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_LessThan_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_LessThan
+  isSpec: "True"
+  name.vb: <
+  fullName: Invex.SemanticVersion.SemVer.operator <
+  fullName.vb: Invex.SemanticVersion.SemVer.<
+  nameWithType: SemVer.operator <
+  nameWithType.vb: SemVer.<
+- uid: Invex.SemanticVersion.SemVer.op_LessThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name: operator <=(SemVer?, SemVer?)
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_LessThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_
+  commentId: M:Invex.SemanticVersion.SemVer.op_LessThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)
+  name.vb: <=(SemVer, SemVer)
+  fullName: Invex.SemanticVersion.SemVer.operator <=(Invex.SemanticVersion.SemVer?, Invex.SemanticVersion.SemVer?)
+  fullName.vb: Invex.SemanticVersion.SemVer.<=(Invex.SemanticVersion.SemVer, Invex.SemanticVersion.SemVer)
+  nameWithType: SemVer.operator <=(SemVer?, SemVer?)
+  nameWithType.vb: SemVer.<=(SemVer, SemVer)
+- uid: Invex.SemanticVersion.SemVer.op_LessThanOrEqual*
+  name: operator <=
+  href: api/Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_op_LessThanOrEqual_
+  commentId: Overload:Invex.SemanticVersion.SemVer.op_LessThanOrEqual
+  isSpec: "True"
+  name.vb: <=
+  fullName: Invex.SemanticVersion.SemVer.operator <=
+  fullName.vb: Invex.SemanticVersion.SemVer.<=
+  nameWithType: SemVer.operator <=
+  nameWithType.vb: SemVer.<=
