@@ -138,7 +138,7 @@ Full documentation: [https://invex-games.github.io/semantic-version/](https://in
 
 ## Development
 
-The repository requires the .NET 10 SDK. From the repository root:
+The repository requires the .NET 11 SDK. From the repository root:
 
 ```shell
 dotnet build Invex.SemanticVersion.slnx
