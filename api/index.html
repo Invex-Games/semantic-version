@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>API Reference | Invex.SemanticVersion </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="API Reference | Invex.SemanticVersion ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/blob/main/api/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/icon.png" alt="Invex.SemanticVersion">
+            Invex.SemanticVersion
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="api-reference">API Reference</h1>
+
+<p><code>Invex.SemanticVersion</code> exposes a single public type; this reference is generated from its XML documentation.</p>
+<h2 id="invexsemanticversion">Invex.SemanticVersion</h2>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Kind</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a class="xref" href="Invex.SemanticVersion.SemVer.html"><code>SemVer</code></a></td>
+<td>sealed class</td>
+<td>An immutable Semantic Versioning 2.0.0 version with parsing, precedence comparison, <code>string</code> and <code>System.Version</code> conversions and <code>System.Text.Json</code> support.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="members-at-a-glance">Members at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Major</code>, <code>Minor</code>, <code>Patch</code></td>
+<td>Core version components.</td>
+</tr>
+<tr>
+<td><code>PreRelease</code>, <code>Metadata</code></td>
+<td>Optional pre-release and build-metadata segments (nullable).</td>
+</tr>
+<tr>
+<td><code>Prefix</code></td>
+<td><code>&quot;MAJOR.MINOR.PATCH&quot;</code> without pre-release/metadata.</td>
+</tr>
+<tr>
+<td><code>IsPreRelease</code></td>
+<td><code>true</code> when a pre-release identifier is present.</td>
+</tr>
+<tr>
+<td><code>BuildNumberFromPreRelease</code> / <code>BuildNumberFromMetadata</code></td>
+<td>Single numeric value extracted from the respective segment, otherwise <code>0</code>; throws <code>OverflowException</code> if that value exceeds <code>int.MaxValue</code>.</td>
+</tr>
+<tr>
+<td><code>SemVer.One</code></td>
+<td>Convenience instance for <code>1.0.0</code>.</td>
+</tr>
+<tr>
+<td><code>Parse</code> / <code>TryParse</code></td>
+<td>String and <code>ReadOnlySpan&lt;char&gt;</code> parsing (<code>ISpanParsable&lt;SemVer&gt;</code>); <code>Parse</code> throws <code>OverflowException</code> when a core component exceeds <code>int.MaxValue</code>, <code>TryParse</code> returns <code>false</code>.</td>
+</tr>
+<tr>
+<td><code>CompareTo</code>, <code>Equals</code>, comparison operators</td>
+<td>SemVer-compliant precedence and equality.</td>
+</tr>
+<tr>
+<td><code>IsBetween</code></td>
+<td>Exclusive, order-independent range check.</td>
+</tr>
+<tr>
+<td><code>ToSystemVersion</code> / <code>FromSystemVersion</code></td>
+<td>Conversion to and from <code>System.Version</code>.</td>
+</tr>
+<tr>
+<td><code>ExtractBuildNumber</code></td>
+<td>Static helper to pull a single number from a string.</td>
+</tr>
+<tr>
+<td>Implicit conversions</td>
+<td><code>string</code> to <code>SemVer</code> (parses, throws on invalid input) and <code>SemVer</code> to <code>string</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="typical-flow">Typical flow</h2>
+<pre><code class="lang-csharp">using Invex.SemanticVersion;
+
+if (SemVer.TryParse(input, out var version) &amp;&amp; version &gt;= &quot;2.0.0&quot;)
+    Console.WriteLine($&quot;Supported: {version.Prefix}&quot;);
+</code></pre>
+<p>For task-oriented guides, start with the <a href="../docs/introduction.html">Introduction</a>.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/main/api/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Invex.SemanticVersion · MIT License · Invex Games
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

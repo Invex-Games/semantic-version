@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class SemVer | Invex.SemanticVersion </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class SemVer | Invex.SemanticVersion ">
+      
+      <meta name="description" content="An immutable semantic version following the Semantic Versioning 2.0.0 specification. Supports parsing, comparison, and conversion operations for version strings in the format MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA].">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Invex-Games/semantic-version/new/main/apiSpec/new?filename=Invex_SemanticVersion_SemVer.md&amp;value=---%0Auid%3A%20Invex.SemanticVersion.SemVer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/icon.png" alt="Invex.SemanticVersion">
+            Invex.SemanticVersion
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Invex.SemanticVersion.SemVer">
+
+
+
+  <h1 id="Invex_SemanticVersion_SemVer" data-uid="Invex.SemanticVersion.SemVer" class="text-break">
+Class SemVer  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L46"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><span class="xref">Invex</span>.<a class="xref" href="Invex.SemanticVersion.html">SemanticVersion</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Invex.SemanticVersion.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>An immutable semantic version following the
+<a href="https://semver.org/">Semantic Versioning 2.0.0</a> specification.
+Supports parsing, comparison, and conversion operations for version strings in the format
+<code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]</code>.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[PublicAPI]
+public sealed class SemVer</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><span class="xref">object</span></div>
+      <div><span class="xref">SemVer</span></div>
+    </dd>
+  </dl>
+
+
+
+
+
+
+  <h2 id="Invex_SemanticVersion_SemVer_examples">Examples</h2>
+  <pre><code class="lang-csharp">var version1 = SemVer.Parse("1.2.3-alpha.1+build.123");
+SemVer version2 = "2.0.0";
+bool isNewer = version2 &gt; version1; // true</code></pre>
+
+
+  <h2 id="Invex_SemanticVersion_SemVer_remarks">Remarks</h2>
+  <div class="markdown level0 remarks"><p>This class implements semantic version comparison where:</p>
+<ul><li>Release versions (without pre-release) are greater than pre-release versions</li><li>Pre-release versions are compared lexicographically by dot-separated identifiers</li><li>
+        Numeric identifiers in pre-release are compared numerically (of any length) and have lower precedence
+        than alphanumeric identifiers
+    </li><li>Metadata is used only as a final tiebreaker when all other components are equal</li></ul>
+<p>
+    Create instances with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_">Parse(string)</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer__">TryParse(string?, out SemVer)</a>,
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_FromSystemVersion_System_Version_System_Boolean_">FromSystemVersion(Version, bool)</a> or the implicit conversion from <span class="xref">string</span>. The public
+    parameterless constructor is obsolete: it always creates version <code>0.0.0</code> and cannot set components.
+</p>
+<p>
+    The type implements <span class="xref">System.ISpanParsable&lt;TSelf&gt;</span>, <span class="xref">System.IComparable&lt;T&gt;</span> and
+    <span class="xref">System.Numerics.IComparisonOperators&lt;TSelf, TOther, TResult&gt;</span>, so it works with generic parsing, sorting and
+    ordered collections.
+</p>
+<p>
+    <code>System.Text.Json</code> serializes a <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> as an object with the <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major">Major</a>,
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor">Minor</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch">Patch</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease">PreRelease</a> and <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata">Metadata</a>
+    properties (null components are written as <code>null</code>) and deserializes it through a private
+    constructor, without a custom converter. The computed properties <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Prefix">Prefix</a>,
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_IsPreRelease">IsPreRelease</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease">BuildNumberFromPreRelease</a> and
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromMetadata">BuildNumberFromMetadata</a> are not serialized.
+</p>
+</div>
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Invex_SemanticVersion_SemVer__ctor_" data-uid="Invex.SemanticVersion.SemVer.#ctor*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer__ctor" data-uid="Invex.SemanticVersion.SemVer.#ctor">
+  SemVer()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L57"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> class representing version <code>0.0.0</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use SemVer.Parse, SemVer.TryParse, SemVer.FromSystemVersion or SemVer.One instead. This constructor always creates version 0.0.0 and will be removed in a future major version.&quot;)]
+public SemVer()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer__ctor_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This constructor was exposed unintentionally. All properties have private <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/init">init</a>
+accessors, so it cannot be used to set components; it always creates version <code>0.0.0</code>.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Invex_SemanticVersion_SemVer_BuildNumberFromMetadata_" data-uid="Invex.SemanticVersion.SemVer.BuildNumberFromMetadata*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_BuildNumberFromMetadata" data-uid="Invex.SemanticVersion.SemVer.BuildNumberFromMetadata">
+  BuildNumberFromMetadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L192"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the build number extracted from the metadata.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public int BuildNumberFromMetadata { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The numeric build number if exactly one number is found in the metadata; otherwise, <code>0</code>
+(including when <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata">Metadata</a> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>).</p>
+</dd>
+  </dl>
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_BuildNumberFromMetadata_examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer.Parse("1.0.0+build.99").BuildNumberFromMetadata; // 99
+SemVer.Parse("1.0.0+build").BuildNumberFromMetadata;    // 0 (no number)
+SemVer.Parse("1.0.0").BuildNumberFromMetadata;          // 0 (no metadata)</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_BuildNumberFromMetadata_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This property applies the same rules as <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_">ExtractBuildNumber(string?)</a> to the metadata string.
+Only returns a non-zero value if exactly one numeric sequence is present. Unlike
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_">ExtractBuildNumber(string?)</a>, it never throws: a single numeric sequence greater than
+<span class="xref">int.MaxValue</span> (for example a timestamp such as <code>+20261014123045</code>) also returns
+<code>0</code>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease_" data-uid="Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease" data-uid="Invex.SemanticVersion.SemVer.BuildNumberFromPreRelease">
+  BuildNumberFromPreRelease
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L154"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the build number extracted from the pre-release identifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public int BuildNumberFromPreRelease { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The numeric build number if exactly one number is found in the pre-release; otherwise, <code>0</code>
+(including when <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease">PreRelease</a> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>).</p>
+</dd>
+  </dl>
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease_examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer.Parse("1.0.0-rc.42").BuildNumberFromPreRelease; // 42
+SemVer.Parse("1.0.0-alpha").BuildNumberFromPreRelease; // 0 (no number)
+SemVer.Parse("1.0.0-1.2").BuildNumberFromPreRelease;   // 0 (multiple numbers)
+SemVer.Parse("1.0.0").BuildNumberFromPreRelease;       // 0 (no pre-release)</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This property applies the same rules as <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_">ExtractBuildNumber(string?)</a> to the pre-release string.
+Only returns a non-zero value if exactly one numeric sequence is present. Unlike
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_">ExtractBuildNumber(string?)</a>, it never throws: a single numeric sequence greater than
+<span class="xref">int.MaxValue</span> also returns <code>0</code>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_IsPreRelease_" data-uid="Invex.SemanticVersion.SemVer.IsPreRelease*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_IsPreRelease" data-uid="Invex.SemanticVersion.SemVer.IsPreRelease">
+  IsPreRelease
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L130"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a value indicating whether this version is a pre-release version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public bool IsPreRelease { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease">PreRelease</a> is not <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Major_" data-uid="Invex.SemanticVersion.SemVer.Major*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Major" data-uid="Invex.SemanticVersion.SemVer.Major">
+  Major
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L84"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the major version number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Major { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The major version number, indicating incompatible API changes.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Metadata_" data-uid="Invex.SemanticVersion.SemVer.Metadata*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Metadata" data-uid="Invex.SemanticVersion.SemVer.Metadata">
+  Metadata
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L169"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the build metadata.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? Metadata { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">string</span></dt>
+    <dd><p>The build metadata string without the leading plus sign, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if no metadata is
+present.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Metadata_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>The specification ignores metadata when determining version precedence. This implementation uses it as a
+final tiebreaker (ordinal string comparison) in <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> when all other components are
+equal, so versions that differ only in metadata are not equal.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Minor_" data-uid="Invex.SemanticVersion.SemVer.Minor*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Minor" data-uid="Invex.SemanticVersion.SemVer.Minor">
+  Minor
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the minor version number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Minor { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The minor version number, indicating backwards-compatible functionality additions.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_One_" data-uid="Invex.SemanticVersion.SemVer.One*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_One" data-uid="Invex.SemanticVersion.SemVer.One">
+  One
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L202"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets a semantic version representing version 1.0.0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SemVer One { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> instance with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major">Major</a> set to 1, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor">Minor</a> and
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch">Patch</a> set to 0, and no pre-release or metadata.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Patch_" data-uid="Invex.SemanticVersion.SemVer.Patch*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Patch" data-uid="Invex.SemanticVersion.SemVer.Patch">
+  Patch
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L96"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the patch version number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Patch { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The patch version number, indicating backwards-compatible bug fixes.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_PreRelease_" data-uid="Invex.SemanticVersion.SemVer.PreRelease*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_PreRelease" data-uid="Invex.SemanticVersion.SemVer.PreRelease">
+  PreRelease
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L121"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the pre-release version identifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string? PreRelease { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">string</span></dt>
+    <dd><p>The pre-release identifier string without the leading hyphen, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if this is a
+release version.</p>
+</dd>
+  </dl>
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_PreRelease_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Pre-release identifiers are dot-separated and may contain alphanumeric characters and hyphens, for example
+<code>alpha.1</code>, <code>rc.2</code> or <code>beta</code>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Prefix_" data-uid="Invex.SemanticVersion.SemVer.Prefix*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Prefix" data-uid="Invex.SemanticVersion.SemVer.Prefix">
+  Prefix
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L107"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the version prefix in the format &quot;MAJOR.MINOR.PATCH&quot;.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonIgnore]
+public string Prefix { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><span class="xref">string</span></dt>
+    <dd><p>A string representing the core version without pre-release or metadata components.</p>
+</dd>
+  </dl>
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Prefix_examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer.Parse("1.2.3-alpha+build").Prefix; // "1.2.3"</code></pre>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Invex_SemanticVersion_SemVer_CompareTo_" data-uid="Invex.SemanticVersion.SemVer.CompareTo*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.CompareTo(Invex.SemanticVersion.SemVer)">
+  CompareTo(SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L233"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compares the current instance with another <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> and returns an integer that indicates
+whether the current instance precedes, follows, or occurs in the same position in the sort order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(SemVer? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> to compare with this instance.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>A value that indicates the relative order of the objects being compared:
+Less than zero if this instance precedes <code class="paramref">other</code>;
+Zero if they are equal;
+Greater than zero if this instance follows <code class="paramref">other</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Comparison follows Semantic Versioning precedence rules:</p>
+<ol><li>Compare major, minor, and patch versions numerically</li><li>Pre-release versions have lower precedence than normal versions</li><li>
+        Pre-release identifiers are compared left to right: identifiers consisting only of ASCII digits
+        are compared numerically (of any length, without overflow), a numeric identifier has lower
+        precedence than an alphanumeric one, and alphanumeric identifiers are compared ordinally (ASCII)
+    </li><li>When all shared identifiers are equal, the version with more pre-release identifiers is greater</li><li>Metadata is used only as a final tiebreaker (ordinal comparison)</li></ol>
+<p>
+    Any instance is greater than <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>, so this method returns a positive value when
+    <code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.
+</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Equals_" data-uid="Invex.SemanticVersion.SemVer.Equals*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.Equals(Invex.SemanticVersion.SemVer)">
+  Equals(SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L719"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(SemVer? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> to compare with the current instance.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> returns zero, meaning all components including
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata">Metadata</a> are equal; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> (including when
+<code class="paramref">other</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>).</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Equals_" data-uid="Invex.SemanticVersion.SemVer.Equals*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Equals_System_Object_" data-uid="Invex.SemanticVersion.SemVer.Equals(System.Object)">
+  Equals(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L730"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified object is equal to the current instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <span class="xref">object</span></dt>
+    <dd><p>The object to compare with the current instance.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> is a <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equal to the current instance
+according to <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_">Equals(SemVer?)</a>; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_ExtractBuildNumber_" data-uid="Invex.SemanticVersion.SemVer.ExtractBuildNumber*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String_" data-uid="Invex.SemanticVersion.SemVer.ExtractBuildNumber(System.String)">
+  ExtractBuildNumber(string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L636"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Extracts a single numeric value from the specified input string.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int ExtractBuildNumber(string? input)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>input</code> <span class="xref">string</span></dt>
+    <dd><p>The string to extract a number from.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>The numeric value if exactly one sequence of digits is found; otherwise, <code>0</code>.
+Returns <code>0</code> if the input is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>, empty, whitespace, or contains zero or multiple
+numbers.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String__examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer.ExtractBuildNumber("alpha.123");   // 123
+SemVer.ExtractBuildNumber("SNAPSHOT-12"); // 12
+SemVer.ExtractBuildNumber("beta");        // 0
+SemVer.ExtractBuildNumber("1.2.3");       // 0 (multiple numbers)
+SemVer.ExtractBuildNumber(null);          // 0</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_ExtractBuildNumber_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p><a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromPreRelease">BuildNumberFromPreRelease</a> and <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_BuildNumberFromMetadata">BuildNumberFromMetadata</a> apply the same
+extraction rules to version components, except that they return <code>0</code> instead of throwing when the
+value is greater than <span class="xref">int.MaxValue</span>. This method can be called on any string.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">OverflowException</span></dt>
+    <dd><p>Thrown when the single sequence of digits is greater than <span class="xref">int.MaxValue</span>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_FromSystemVersion_" data-uid="Invex.SemanticVersion.SemVer.FromSystemVersion*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_FromSystemVersion_System_Version_System_Boolean_" data-uid="Invex.SemanticVersion.SemVer.FromSystemVersion(System.Version,System.Boolean)">
+  FromSystemVersion(Version, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L605"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> instance from a <span class="xref">System.Version</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SemVer FromSystemVersion(Version version, bool throwIfContainsRevision = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>version</code> <span class="xref">Version</span></dt>
+    <dd><p>The <span class="xref">System.Version</span> to convert.</p>
+</dd>
+    <dt><code>throwIfContainsRevision</code> <span class="xref">bool</span></dt>
+    <dd><p>If <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, throws an exception when the version has a revision greater than zero.
+Defaults to <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> with Major, Minor, and Patch (from Build) components and no pre-release or
+metadata.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_FromSystemVersion_System_Version_System_Boolean__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+    Maps System.Version Major.Minor.Build to SemVer Major.Minor.Patch.
+    The revision component is ignored unless <code class="paramref">throwIfContainsRevision</code> is
+    <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>.
+</p>
+<p>
+    An undefined <span class="xref">System.Version.Build</span> (<code>-1</code>, as in <code>new Version(1, 2)</code>) maps to a
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch">Patch</a> of <code>0</code>, so the result is always a valid version that
+    <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToSystemVersion_System_Boolean_System_Boolean_">ToSystemVersion(bool, bool)</a> can convert back.
+</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">throwIfContainsRevision</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> and
+<span class="xref">System.Version.Revision</span> is greater than zero.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_GetHashCode_" data-uid="Invex.SemanticVersion.SemVer.GetHashCode*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_GetHashCode" data-uid="Invex.SemanticVersion.SemVer.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L740"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serves as the default hash function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">int</span></dt>
+    <dd><p>A hash code computed from <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major">Major</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor">Minor</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch">Patch</a>,
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_PreRelease">PreRelease</a> and <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Metadata">Metadata</a>, consistent with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_">Equals(SemVer?)</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_IsBetween_" data-uid="Invex.SemanticVersion.SemVer.IsBetween*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_IsBetween_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.IsBetween(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  IsBetween(SemVer, SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L537"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the current version is between two specified versions (exclusive).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsBetween(SemVer firstBound, SemVer secondBound)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>firstBound</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The first boundary version.</p>
+</dd>
+    <dt><code>secondBound</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The second boundary version.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if this version is strictly between the two bounds; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_IsBetween_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__examples">Examples</h4>
+  <pre><code class="lang-csharp">var version = SemVer.Parse("1.5.0");
+version.IsBetween("1.0.0", "2.0.0"); // true
+version.IsBetween("2.0.0", "1.0.0"); // true (bounds in any order)
+version.IsBetween("1.0.0", "1.5.0"); // false (bounds are exclusive)</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_IsBetween_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>
+    Both bounds are exclusive and may be supplied in any order; the lower one is determined with the same
+    precedence rules as <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a>, so pre-release and metadata in the bounds are respected.
+</p>
+<p>
+    If both bounds are equal, returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> only if this version equals the bounds.
+</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Parse_" data-uid="Invex.SemanticVersion.SemVer.Parse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Parse_System_ReadOnlySpan_System_Char__System_IFormatProvider_" data-uid="Invex.SemanticVersion.SemVer.Parse(System.ReadOnlySpan{System.Char},System.IFormatProvider)">
+  Parse(ReadOnlySpan&lt;char&gt;, IFormatProvider?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L485"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Parses a span of characters representing a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SemVer Parse(ReadOnlySpan&lt;char&gt; s, IFormatProvider? provider)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">ReadOnlySpan</span>&lt;<span class="xref">char</span>&gt;</dt>
+    <dd><p>The span of characters to parse.</p>
+</dd>
+    <dt><code>provider</code> <span class="xref">IFormatProvider</span></dt>
+    <dd><p>Ignored; parsing is culture-independent.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in <code class="paramref">s</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Parse_System_ReadOnlySpan_System_Char__System_IFormatProvider__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This overload implements <span class="xref">System.ISpanParsable&lt;TSelf&gt;</span>.
+The span is converted to a string and parsed with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_System_IFormatProvider_">Parse(string, IFormatProvider?)</a>.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is not a valid semantic version string.</p>
+</dd>
+    <dt><span class="xref">OverflowException</span></dt>
+    <dd><p>Thrown when the major, minor or patch component is greater than <span class="xref">int.MaxValue</span>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Parse_" data-uid="Invex.SemanticVersion.SemVer.Parse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Parse_System_String_" data-uid="Invex.SemanticVersion.SemVer.Parse(System.String)">
+  Parse(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L669"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Parses a string representation of a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SemVer Parse(string s)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">string</span></dt>
+    <dd><p>The string to parse.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in <code class="paramref">s</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Parse_System_String__examples">Examples</h4>
+  <pre><code class="lang-csharp">var version = SemVer.Parse("1.2.3-alpha.1+build.456");</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Parse_System_String__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Accepts version strings in the format <code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]</code>
+where MAJOR, MINOR, and PATCH are non-negative integers without leading zeros. Use
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer__">TryParse(string?, out SemVer)</a> when the input may be invalid.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentNullException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is not a valid semantic version string.</p>
+</dd>
+    <dt><span class="xref">OverflowException</span></dt>
+    <dd><p>Thrown when the major, minor or patch component is greater than <span class="xref">int.MaxValue</span>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_Parse_" data-uid="Invex.SemanticVersion.SemVer.Parse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_Parse_System_String_System_IFormatProvider_" data-uid="Invex.SemanticVersion.SemVer.Parse(System.String,System.IFormatProvider)">
+  Parse(string, IFormatProvider?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L388"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Parses a string representation of a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SemVer Parse(string s, IFormatProvider? provider)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">string</span></dt>
+    <dd><p>The string to parse.</p>
+</dd>
+    <dt><code>provider</code> <span class="xref">IFormatProvider</span></dt>
+    <dd><p>Ignored; parsing is culture-independent.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in <code class="paramref">s</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_Parse_System_String_System_IFormatProvider__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This overload implements <span class="xref">System.IParsable&lt;TSelf&gt;</span>. Input is validated
+with the regular expression suggested by the Semantic Versioning 2.0.0 specification, so leading zeros in
+numeric components and empty pre-release or metadata segments are rejected.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentNullException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is not a valid semantic version string.</p>
+</dd>
+    <dt><span class="xref">OverflowException</span></dt>
+    <dd><p>Thrown when the major, minor or patch component is greater than <span class="xref">int.MaxValue</span>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_ToString_" data-uid="Invex.SemanticVersion.SemVer.ToString*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_ToString" data-uid="Invex.SemanticVersion.SemVer.ToString">
+  ToString()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L797"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Returns the string representation of this semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">string</span></dt>
+    <dd><p>A string in the format <code>MAJOR.MINOR.PATCH[-PRERELEASE][+METADATA]</code>,
+where the pre-release and metadata components are included only if present.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_ToString_examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer.Parse("1.2.3").ToString();               // "1.2.3"
+SemVer.Parse("1.2.3-alpha").ToString();         // "1.2.3-alpha"
+SemVer.Parse("1.2.3+build.1").ToString();       // "1.2.3+build.1"
+SemVer.Parse("1.2.3-alpha+build.1").ToString(); // "1.2.3-alpha+build.1"</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_ToString_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>For a version obtained by parsing, the result round-trips: parsing it again with
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_">Parse(string)</a> produces an equal version.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_ToSystemVersion_" data-uid="Invex.SemanticVersion.SemVer.ToSystemVersion*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_ToSystemVersion_System_Boolean_System_Boolean_" data-uid="Invex.SemanticVersion.SemVer.ToSystemVersion(System.Boolean,System.Boolean)">
+  ToSystemVersion(bool, bool)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L569"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts this semantic version to a <span class="xref">System.Version</span> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Version ToSystemVersion(bool throwIfContainsPreRelease = false, bool throwIfContainsMetadata = false)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>throwIfContainsPreRelease</code> <span class="xref">bool</span></dt>
+    <dd><p>If <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, throws an exception when pre-release data is present. Defaults to
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+    <dt><code>throwIfContainsMetadata</code> <span class="xref">bool</span></dt>
+    <dd><p>If <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>, throws an exception when metadata is present. Defaults to
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">Version</span></dt>
+    <dd><p>A <span class="xref">System.Version</span> with Major, Minor, and Build (from Patch) components.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_ToSystemVersion_System_Boolean_System_Boolean__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Maps SemVer Major.Minor.Patch to System.Version Major.Minor.Build.
+Pre-release and metadata information is lost in the conversion.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">throwIfContainsPreRelease</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> and pre-release data
+is present, or when <code class="paramref">throwIfContainsMetadata</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> and metadata is
+present.</p>
+</dd>
+    <dt><span class="xref">ArgumentOutOfRangeException</span></dt>
+    <dd><p>Thrown when <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Major">Major</a>, <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Minor">Minor</a> or <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Patch">Patch</a> is negative, which can only
+happen for an instance deserialized from JSON containing negative components.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_TryParse_" data-uid="Invex.SemanticVersion.SemVer.TryParse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__Invex_SemanticVersion_SemVer__" data-uid="Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},Invex.SemanticVersion.SemVer@)">
+  TryParse(ReadOnlySpan&lt;char&gt;, out SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L707"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to parse a span of characters representing a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(ReadOnlySpan&lt;char&gt; s, out SemVer result)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">ReadOnlySpan</span>&lt;<span class="xref">char</span>&gt;</dt>
+    <dd><p>The span of characters to parse.</p>
+</dd>
+    <dt><code>result</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>When this method returns, contains the <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in
+<code class="paramref">s</code> if the conversion succeeded, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if it failed.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">s</code> was converted successfully; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__Invex_SemanticVersion_SemVer___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Never throws; returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> for invalid input, including components greater than
+<span class="xref">int.MaxValue</span>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_TryParse_" data-uid="Invex.SemanticVersion.SemVer.TryParse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__System_IFormatProvider_Invex_SemanticVersion_SemVer__" data-uid="Invex.SemanticVersion.SemVer.TryParse(System.ReadOnlySpan{System.Char},System.IFormatProvider,Invex.SemanticVersion.SemVer@)">
+  TryParse(ReadOnlySpan&lt;char&gt;, IFormatProvider?, out SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L505"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to parse a span of characters representing a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(ReadOnlySpan&lt;char&gt; s, IFormatProvider? provider, out SemVer result)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">ReadOnlySpan</span>&lt;<span class="xref">char</span>&gt;</dt>
+    <dd><p>The span of characters to parse.</p>
+</dd>
+    <dt><code>provider</code> <span class="xref">IFormatProvider</span></dt>
+    <dd><p>Ignored; parsing is culture-independent.</p>
+</dd>
+    <dt><code>result</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>When this method returns, contains the <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in
+<code class="paramref">s</code> if the conversion succeeded, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if it failed.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">s</code> was converted successfully; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_TryParse_System_ReadOnlySpan_System_Char__System_IFormatProvider_Invex_SemanticVersion_SemVer___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This overload implements <span class="xref">System.ISpanParsable&lt;TSelf&gt;</span>. The span is converted to a string and parsed
+with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_System_IFormatProvider_Invex_SemanticVersion_SemVer__">TryParse(string?, IFormatProvider?, out SemVer)</a>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_TryParse_" data-uid="Invex.SemanticVersion.SemVer.TryParse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer__" data-uid="Invex.SemanticVersion.SemVer.TryParse(System.String,Invex.SemanticVersion.SemVer@)">
+  TryParse(string?, out SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L688"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to parse a string representation of a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(string? s, out SemVer result)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">string</span></dt>
+    <dd><p>The string to parse.</p>
+</dd>
+    <dt><code>result</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>When this method returns, contains the <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in
+<code class="paramref">s</code> if the conversion succeeded, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if it failed.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">s</code> was converted successfully; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Never throws; returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> for invalid input, including components greater than
+<span class="xref">int.MaxValue</span>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_TryParse_" data-uid="Invex.SemanticVersion.SemVer.TryParse*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_TryParse_System_String_System_IFormatProvider_Invex_SemanticVersion_SemVer__" data-uid="Invex.SemanticVersion.SemVer.TryParse(System.String,System.IFormatProvider,Invex.SemanticVersion.SemVer@)">
+  TryParse(string?, IFormatProvider?, out SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L427"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Tries to parse a string representation of a semantic version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryParse(string? s, IFormatProvider? provider, out SemVer result)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">string</span></dt>
+    <dd><p>The string to parse.</p>
+</dd>
+    <dt><code>provider</code> <span class="xref">IFormatProvider</span></dt>
+    <dd><p>Ignored; parsing is culture-independent.</p>
+</dd>
+    <dt><code>result</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>When this method returns, contains the <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent to the version contained in
+<code class="paramref">s</code> if the conversion succeeded, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> if it failed.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">s</code> was converted successfully; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_TryParse_System_String_System_IFormatProvider_Invex_SemanticVersion_SemVer___remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This overload implements <span class="xref">System.IParsable&lt;TSelf&gt;</span> and
+never throws: it returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a> when <code class="paramref">s</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>,
+is not a valid semantic version string, or has a major, minor or patch component greater than
+<span class="xref">int.MaxValue</span>.</p>
+</div>
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_Equality_" data-uid="Invex.SemanticVersion.SemVer.op_Equality*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_Equality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_Equality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator ==(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L356"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether two versions are equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The first version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The second version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if both are <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>, or if <code class="paramref">left</code> is not
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> and <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_">Equals(SemVer?)</a> returns <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a>; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_Equality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe and, like <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Equals_Invex_SemanticVersion_SemVer_">Equals(SemVer?)</a>, takes metadata into account.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_GreaterThan_" data-uid="Invex.SemanticVersion.SemVer.op_GreaterThan*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_GreaterThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_GreaterThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator &gt;(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L294"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether <code class="paramref">left</code> has higher precedence than <code class="paramref">right</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare against, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">left</code> compared with <code class="paramref">right</code> using
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> gives a value greater than zero; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_GreaterThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> precedes every version and two
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> operands are equal, consistent with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_GreaterThanOrEqual_" data-uid="Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_GreaterThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_GreaterThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator &gt;=(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L310"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether <code class="paramref">left</code> has the same or higher precedence than <code class="paramref">right</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;=(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare against, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">left</code> compared with <code class="paramref">right</code> using
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> gives a value greater than or equal to zero; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_GreaterThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> precedes every version and two
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> operands are equal, consistent with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_Implicit_" data-uid="Invex.SemanticVersion.SemVer.op_Implicit*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_Implicit_Invex_SemanticVersion_SemVer__System_String" data-uid="Invex.SemanticVersion.SemVer.op_Implicit(Invex.SemanticVersion.SemVer)~System.String">
+  implicit operator string(SemVer)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L775"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts a <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> to its string representation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator string(SemVer semVer)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>semVer</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> to convert. Must not be <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">string</span></dt>
+    <dd><p>The string representation of the semantic version, as returned by <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_ToString">ToString()</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_Implicit_Invex_SemanticVersion_SemVer__System_String_examples">Examples</h4>
+  <pre><code class="lang-csharp">string text = SemVer.Parse("1.2.3"); // "1.2.3"</code></pre>
+
+
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_Implicit_" data-uid="Invex.SemanticVersion.SemVer.op_Implicit*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_Implicit_System_String__Invex_SemanticVersion_SemVer" data-uid="Invex.SemanticVersion.SemVer.op_Implicit(System.String)~Invex.SemanticVersion.SemVer">
+  implicit operator SemVer(string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L762"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Converts the string representation of a semantic version to its <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> equivalent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static implicit operator SemVer(string s)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>s</code> <span class="xref">string</span></dt>
+    <dd><p>The string representation of the semantic version.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>A <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a> object equivalent to the version contained in <code class="paramref">s</code>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_Implicit_System_String__Invex_SemanticVersion_SemVer_examples">Examples</h4>
+  <pre><code class="lang-csharp">SemVer version = "1.2.3-rc.1";</code></pre>
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_Implicit_System_String__Invex_SemanticVersion_SemVer_remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>Calls <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_Parse_System_String_">Parse(string)</a>, so invalid input throws. Use <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_TryParse_System_String_Invex_SemanticVersion_SemVer__">TryParse(string?, out SemVer)</a>
+when the input may be untrusted.</p>
+</div>
+
+  <h4 class="section">Exceptions</h4>
+  <dl class="parameters">
+    <dt><span class="xref">ArgumentNullException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><span class="xref">ArgumentException</span></dt>
+    <dd><p>Thrown when <code class="paramref">s</code> is not a valid semantic version string.</p>
+</dd>
+    <dt><span class="xref">OverflowException</span></dt>
+    <dd><p>Thrown when the major, minor or patch component is greater than <span class="xref">int.MaxValue</span>.</p>
+</dd>
+  </dl>
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_Inequality_" data-uid="Invex.SemanticVersion.SemVer.op_Inequality*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_Inequality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_Inequality(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator !=(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L369"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether two versions are not equal.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The first version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The second version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the versions are not equal according to the equality operator; otherwise,
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_Inequality_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_LessThan_" data-uid="Invex.SemanticVersion.SemVer.op_LessThan*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_LessThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_LessThan(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator &lt;(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L326"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether <code class="paramref">left</code> has lower precedence than <code class="paramref">right</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare against, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">left</code> compared with <code class="paramref">right</code> using
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> gives a value less than zero; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_LessThan_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> precedes every version and two
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> operands are equal, consistent with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a>.</p>
+</div>
+
+
+
+
+  <a id="Invex_SemanticVersion_SemVer_op_LessThanOrEqual_" data-uid="Invex.SemanticVersion.SemVer.op_LessThanOrEqual*"></a>
+
+  <h3 id="Invex_SemanticVersion_SemVer_op_LessThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer_" data-uid="Invex.SemanticVersion.SemVer.op_LessThanOrEqual(Invex.SemanticVersion.SemVer,Invex.SemanticVersion.SemVer)">
+  operator &lt;=(SemVer?, SemVer?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L342"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether <code class="paramref">left</code> has the same or lower precedence than <code class="paramref">right</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;=(SemVer? left, SemVer? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+    <dt><code>right</code> <a class="xref" href="Invex.SemanticVersion.SemVer.html">SemVer</a></dt>
+    <dd><p>The version to compare against, or <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a>.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><span class="xref">bool</span></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">left</code> compared with <code class="paramref">right</code> using
+<a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a> gives a value less than or equal to zero; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+  <h4 class="section" id="Invex_SemanticVersion_SemVer_op_LessThanOrEqual_Invex_SemanticVersion_SemVer_Invex_SemanticVersion_SemVer__remarks">Remarks</h4>
+  <div class="markdown level1 remarks"><p>This operator is null-safe: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> precedes every version and two
+<a href="https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/null">null</a> operands are equal, consistent with <a class="xref" href="Invex.SemanticVersion.SemVer.html#Invex_SemanticVersion_SemVer_CompareTo_Invex_SemanticVersion_SemVer_">CompareTo(SemVer?)</a>.</p>
+</div>
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Invex-Games/semantic-version/blob/v2.2.0/src/Invex.SemanticVersion/SemVer.cs/#L46" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          Invex.SemanticVersion · MIT License · Invex Games
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
