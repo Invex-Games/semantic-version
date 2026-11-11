@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- A .NET 11.0 target. The package now targets .NET 10.0 and .NET 11.0.
+
 ### Changed
 
 - Pre-release precedence now follows SemVer 2.0.0 §11.4 exactly: numeric identifiers of any length are compared
@@ -34,7 +38,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Removed
 
-- The .NET 8.0 and .NET 9.0 targets. The package now targets .NET 10.0 only.
+- The .NET 8.0 and .NET 9.0 targets.
 - The unused `System.IO.Abstractions` package dependency.
 
 ---

@@ -25,7 +25,7 @@ Install from [NuGet](https://www.nuget.org/packages/Invex.SemanticVersion):
 dotnet add package Invex.SemanticVersion
 ```
 
-The package targets .NET 10.0. It references `JetBrains.Annotations`, which NuGet restores automatically.
+The package targets .NET 10.0 and .NET 11.0. It references `JetBrains.Annotations`, which NuGet restores automatically.
 
 ## Quick start
 
@@ -138,7 +138,7 @@ Full documentation: [https://invex-games.github.io/semantic-version/](https://in
 
 ## Development
 
-The repository requires the .NET 11 SDK, plus the .NET 10 runtime (or SDK) for the `net10.0` projects. From the repository root:
+The repository requires the .NET 11 SDK, plus the .NET 10 runtime (or SDK) for the `net10.0` builds. From the repository root:
 
 ```shell
 dotnet build Invex.SemanticVersion.slnx
