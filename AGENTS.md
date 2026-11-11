@@ -17,7 +17,7 @@ DocFX documentation site under `docs/` and `api/`.
 
 ## Build & language specifics
 
-- **.NET 11 SDK** (currently RC2) is required. Both projects target `net10.0`.
+- **.NET 11 SDK** is required. Both projects target `net10.0`.
 - C# `LangVersion 15`, `ImplicitUsings` and `Nullable` enabled, `TreatWarningsAsErrors` on.
 - Global usings live in each project's `_usings.cs` — add shared usings there, not per-file.
 - `GenerateDocumentationFile` is on and `CS1591` is **enforced** in `src/` — every public type
