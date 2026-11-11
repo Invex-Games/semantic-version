@@ -9,15 +9,15 @@ Keep changes focused and defer to the linked docs for detail.
 
 | Project | Role | Target frameworks |
 |---------|------|-------------------|
-| `Invex.SemanticVersion` | The only library: `SemVer` class with parsing, comparison, JSON serialization, and `System.Version` interop | `net10.0` |
-| `Invex.SemanticVersion.Tests` | NUnit test suite covering the full public API | `net10.0` |
+| `Invex.SemanticVersion` | The only library: `SemVer` class with parsing, comparison, JSON serialization, and `System.Version` interop | `net10.0`, `net11.0` |
+| `Invex.SemanticVersion.Tests` | NUnit test suite covering the full public API | `net10.0`, `net11.0` |
 
 Sources live under `src/`, tests under `tests/`, the Atom build definition under `_atom/`, and the
 DocFX documentation site under `docs/` and `api/`.
 
 ## Build & language specifics
 
-- **.NET 11 SDK** is required, plus the .NET 10 runtime (or SDK): both projects target `net10.0`.
+- **.NET 11 SDK** is required, plus the .NET 10 runtime (or SDK): both projects target `net10.0` and `net11.0`.
 - C# `LangVersion 15`, `ImplicitUsings` and `Nullable` enabled, `TreatWarningsAsErrors` on.
 - Global usings live in each project's `_usings.cs` — add shared usings there, not per-file.
 - `GenerateDocumentationFile` is on and `CS1591` is **enforced** in `src/` — every public type
@@ -94,8 +94,8 @@ analyser (`Invex.RepoUtils.PublicApiAnalyzers`) flags anything missing, and warn
   1. Overwrite the `*.verified.txt` with the contents of the matching `*.received.txt`.
   2. Delete the `*.received.txt`.
   3. Re-run `dotnet test` to confirm the suite is green.
-- The tests run on `net10.0` on every CI platform. Ensure new code behaves identically
-  across them.
+- The tests run on both `net10.0` and `net11.0` in CI. Ensure new code behaves identically
+  on both.
 
 ## Adding a new member to `SemVer`
 
