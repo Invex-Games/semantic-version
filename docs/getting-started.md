@@ -10,6 +10,7 @@ new to the library.
 | Target Framework | Minimum SDK |
 |-----------------|-------------|
 | .NET 10.0       | .NET SDK 10 |
+| .NET 11.0       | .NET SDK 11 |
 
 The package references `JetBrains.Annotations`, which NuGet restores automatically.
 
